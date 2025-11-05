@@ -95,6 +95,9 @@ export function PetInfoForm() {
               </s.Label>
               <s.Input
                 type="text"
+                maxLength={
+                  obj.label === "name" ? 10 : obj.label === "age" ? 4 : 6
+                }
                 placeholder={obj.placeholder}
                 onChange={(e) => {
                   const value = e.target.value;
@@ -137,7 +140,7 @@ export function PetInfoForm() {
 
               setForm((prev) => {
                 const newObj = { ...prev };
-                newObj.gender = "female";
+                newObj.gender = "FEMALE";
                 return newObj;
               });
             }}
@@ -151,7 +154,7 @@ export function PetInfoForm() {
               genderhandle("male", setGenderChecked);
               setForm((prev) => {
                 const newObj = { ...prev };
-                newObj.gender = "male";
+                newObj.gender = "MALE";
                 return newObj;
               });
             }}
