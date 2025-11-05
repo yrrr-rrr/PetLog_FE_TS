@@ -10,10 +10,10 @@ export const Main = styled.main`
   flex-direction: column;
 `;
 export const PageTitleSection = styled.section`
-  gap: 12px;
+  gap: 8px;
   width: 60%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
 `;
 
 export const BackBtn = styled(GetIcon)`
@@ -33,6 +33,7 @@ export const Title = styled.p`
 `;
 
 export const Notice = styled.p`
+  padding-left: 36px;
   color: ${({ theme }) => theme.color.gray_4};
   font-size: ${({ theme }) => theme.font.body_XS};
   font-weight: ${({ theme }) => theme.font.weightRegular};

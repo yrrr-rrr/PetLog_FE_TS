@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import * as s from "./style";
 import { useWarningModal } from "@/shared/warmingModal/store/warningModalStore";
 import { WarningModal } from "@/shared/warmingModal/ui/warningModal";
+import { BackButton } from "@/shared/backBtn/BackButton";
 
 export function MakeGroup() {
   const { step, setStep } = useForm();
@@ -14,18 +15,17 @@ export function MakeGroup() {
   return (
     <s.Main>
       <s.PageTitleSection>
-        <s.BackBtn
-          name="PrevBtn"
-          width={24}
+        <BackButton
           onClick={() => {
             nav(-1);
             if (step === 2) {
               setStep("prev");
             }
           }}
-        />
+        >
+          {pageInfoText[step - 1]}
+        </BackButton>
         <s.TextSection>
-          <s.Title>{pageInfoText[step - 1]}</s.Title>
           <s.Notice>
             <span>*</span>표시가 있는 항목은 반드시 입력해야 합니다
           </s.Notice>
