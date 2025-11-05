@@ -1,7 +1,7 @@
 import { GetIcon } from "@/shared/getIcon/getIcon";
 import * as s from "./style";
 import React, { useMemo, useState } from "react";
-import { Button } from "@/shared/button/ui";
+import { Button } from "@/shared/button/button";
 import { useForm, type PetInfo } from "../../store/formStore";
 
 export function PetInfoForm() {

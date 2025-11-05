@@ -1,4 +1,4 @@
-import { Button } from "@/shared/button/ui";
+import { Button } from "@/shared/button/button";
 import { useWarningModal } from "../store/warningModalStore";
 import { useLocation } from "react-router-dom";
 import { useForm } from "@/features/makeGroup/store/formStore";

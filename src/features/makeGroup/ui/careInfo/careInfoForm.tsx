@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useForm, type CareInfo, type PetInfo } from "../../store/formStore";
 import * as s from "./style";
-import { Button } from "@/shared/button/ui";
+import { Button } from "@/shared/button/button";
 import type { CareDisabledObj } from "./type";
 import { CycleInput } from "./container/cycleInput";
 import { LastCareTime } from "./container/lastCareTime";
