@@ -1,0 +1,38 @@
+import type { DefaultTheme } from "styled-components";
+
+export const theme: DefaultTheme = {
+  color: {
+    yellow: "#FFD737",
+    green: "#81C26C",
+    red: "#FF6161",
+    blue: "#5C9BFF",
+    pink: "#FC90AF",
+    orange: "#FF8E2C",
+    sub_yellow: "#FFF8DA",
+    sub_green: "#F0FFEC",
+    sub_blue: "#EBF1FF",
+    black: "#1E1E1E",
+    white: "#FDFDFB",
+    gray_1: "#F5F7F8",
+    gray_2: "#F6F1EB",
+    gray_3: "#DDDDDD",
+    gray_4: "#A9A9A9",
+    gray_5: "#707070",
+    black_dimmed: "rgba(30, 30, 30, 0.5)",
+  },
+  font: {
+    family: `"Pretendard", "Noto Sans KR", system-ui, -apple-system, Segoe UI, Roboto, sans-serif`,
+    heading_XXL: "40px",
+    heading_XL: "36px",
+    heading_L: "24px",
+    heading_M: "18px",
+    body_L: "16px",
+    body_M: "14px",
+    body_S: "12px",
+    body_XS: "10px",
+    description: "8px",
+    weightBold: 700,
+    weightSemiBold: 600,
+    weightRegular: 400,
+  },
+};
