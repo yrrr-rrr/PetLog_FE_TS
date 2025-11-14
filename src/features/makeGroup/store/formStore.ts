@@ -1,20 +1,5 @@
 import { create } from "zustand";
-
-export type PetInfo = {
-  imgUrl: string;
-  name: string;
-  age: string;
-  weight: string;
-  gender: string;
-};
-
-export type CareInfo = {
-  feedingCycle: number;
-  lastFeedingTime: Date;
-  wateringCycle: number;
-  lastWateringTime: Date;
-  note: string | null;
-};
+import type { PetInfo } from "../type";
 
 type FormType = {
   petInfo: PetInfo;
