@@ -1,31 +1,45 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { useForm, type CareInfo, type PetInfo } from "../../store/formStore";
+import { useMemo, useState } from "react";
+import { useForm } from "../../store/formStore";
 import * as s from "./style";
 import { Button } from "@/shared/button/button";
-import type { CareDisabledObj } from "./type";
 import { CycleInput } from "./container/cycleInput";
 import { LastCareTime } from "./container/lastCareTime";
 import { useWarningModal } from "@/shared/warmingModal/store/warningModalStore";
+import type { CareFormType } from "../../type";
+import { postGroupInfo } from "../../lib/postGroupInfo";
 
 export function CareInfoForm() {
   const { petInfo } = useForm();
-  const { openModal, isOpen } = useWarningModal();
-  const [disabled, setDisabled] = useState<CareDisabledObj>({
-    feedingCycle: true,
-    lastFeedingTime: true,
-    wateringCycle: true,
-    lastWateringTime: true,
+  const { openModal } = useWarningModal();
+  const [disabled, setDisabled] = useState({
+    feedingCycle: false,
+    lastFeedingTimeHour: false,
+    lastFeedingTimeMinute: false,
+    wateringCycle: false,
+    lastWateringTimeHour: false,
+    lastWateringTimeMinute: false,
+    note: false,
   });
-  const [form, setForm] = useState<CareInfo>({
+  const [form, setForm] = useState<CareFormType>({
     feedingCycle: 0,
-    lastFeedingTime: new Date(),
+    lastFeedingTimeHour: 0,
+    lastFeedingTimeMinute: 0,
     wateringCycle: 0,
-    lastWateringTime: new Date(),
+    lastWateringTimeHour: 0,
+    lastWateringTimeMinute: 0,
     note: null,
   });
 
-  const abled = useMemo(
-    () => Object.entries(disabled).every(([_, v]) => v === false, [disabled]),
+  const isFilled = useMemo(
+    () =>
+      Object.entries(form)
+        .filter(([K]) => K !== "note")
+        .every(([_, v]) => v !== 0),
+    [form],
+  );
+
+  const isWarning = useMemo(
+    () => Object.entries(disabled).every(([_, v]) => v === false),
     [disabled],
   );
 
@@ -34,29 +48,33 @@ export function CareInfoForm() {
       <s.Section>
         <CycleInput
           label="급여 주기"
-          type="meal"
+          type="feedingCycle"
           setForm={setForm}
           setDisabled={setDisabled}
+          disabled={disabled}
         />
         <LastCareTime
           label="마지막 급여 시간"
-          type="meal"
+          type="lastFeedingTime"
           setForm={setForm}
           setDisabled={setDisabled}
+          disabled={disabled}
         />
       </s.Section>
       <s.Section>
         <CycleInput
           label="물 교체 주기"
-          type="replace"
+          type="wateringCycle"
           setForm={setForm}
           setDisabled={setDisabled}
+          disabled={disabled}
         />
         <LastCareTime
           label="마지막 교체 시간"
-          type="replace"
+          type="lastWateringTime"
           setForm={setForm}
           setDisabled={setDisabled}
+          disabled={disabled}
         />
       </s.Section>
       <s.Note
@@ -73,7 +91,7 @@ export function CareInfoForm() {
       ></s.Note>
       <s.BtnBox>
         <Button
-          disabled={!abled}
+          disabled={!(isFilled && isWarning)}
           onClick={(e) => {
             e.preventDefault();
             postGroupInfo(petInfo, form, openModal);
@@ -84,37 +102,4 @@ export function CareInfoForm() {
       </s.BtnBox>
     </s.Form>
   );
-}
-
-async function postGroupInfo(
-  petInfo: PetInfo,
-  careInfo: CareInfo,
-  openModal: (warningMessage: string) => void,
-) {
-  try {
-    const response = await fetch("/api/groups", {
-      //나중에 스웨거 오면 경로 수정
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        imageUrl: petInfo.imgUrl,
-        name: petInfo.name,
-        age: petInfo.age,
-        weight: petInfo.weight,
-        gender: petInfo.gender,
-        feedingCycle: careInfo.feedingCycle,
-        lastFeedingTime: careInfo.lastFeedingTime,
-        wateringCycle: careInfo.wateringCycle,
-        lastWateringTime: careInfo.lastWateringTime,
-        note: careInfo.note,
-      }),
-    });
-    if (!response.ok) {
-      openModal("전송 오류가 발생했습니다");
-    }
-  } catch (e) {
-    openModal("전송 오류가 발생했습니다");
-  }
 }

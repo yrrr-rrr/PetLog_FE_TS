@@ -1,46 +1,14 @@
 import * as s from "@/features/makeGroup/ui/careInfo/style";
 import type React from "react";
-import type { CareDisabledObj } from "../type";
-import { useEffect, useState } from "react";
-import type { CareInfo } from "@/features/makeGroup/store/formStore";
+import {
+  handleForm,
+  handleOnChange,
+} from "@/features/makeGroup/lib/handleForm";
+import type { CareFormType } from "@/features/makeGroup/type";
 
 export function CycleInput(props: Props) {
-  const { label, type, setForm, setDisabled } = props;
-  const [warning, setWarning] = useState(true);
-  const [firstWrite, setFirstWrite] = useState(false);
-
-  useEffect(() => {
-    if (!warning && firstWrite) {
-      setDisabled((prev) => {
-        if (type === "meal") {
-          if (prev.feedingCycle === false) {
-            return prev;
-          }
-          return { ...prev, feedingCycle: false };
-        } else {
-          if (prev.wateringCycle === false) {
-            return prev;
-          }
-          return { ...prev, wateringCycle: false };
-        }
-      });
-    } else {
-      setDisabled((prev) => {
-        if (type === "meal") {
-          if (prev.feedingCycle === true) {
-            return prev;
-          }
-          return { ...prev, feedingCycle: true };
-        } else {
-          if (prev.wateringCycle === true) {
-            return prev;
-          }
-          return { ...prev, wateringCycle: true };
-        }
-      });
-    }
-  }, [firstWrite, warning, setDisabled, type]);
-
+  const { label, type, setForm, setDisabled, disabled } = props;
+  const key = type as keyof CareFormType;
   return (
     <s.InputBox>
       <s.InputInfoBox>
@@ -49,28 +17,22 @@ export function CycleInput(props: Props) {
           <span>*</span>
         </s.Label>
         <s.Description>
-          시간은 24시간 기준으로 작성해 주세요 (ex 17:30)
+          시간은 24시간 기준으로 작성해 주세요 (ex 5시 → 17시)
         </s.Description>
       </s.InputInfoBox>
       <s.TimeBox>
         <s.Input
           type="text"
+          maxLength={2}
           onChange={(e) => {
             const value = Number(e.target.value);
-            setForm((prev) => {
-              if (type === "meal") {
-                return { ...prev, feedingCycle: value };
-              } else {
-                return { ...prev, wateringCycle: value };
-              }
-            });
-            setWarning(value ? false : true);
-            setFirstWrite(true);
+            handleForm(key, value, setForm);
+            handleOnChange(key, value, setDisabled);
           }}
         />
         <span>시간</span>
       </s.TimeBox>
-      {warning && firstWrite && (
+      {disabled[key] && (
         <s.WarningMassage>
           해당 항목은 비워두거나 한글을 입력할 수 없습니다
         </s.WarningMassage>
@@ -82,6 +44,9 @@ export function CycleInput(props: Props) {
 type Props = {
   label: string;
   type: string;
-  setForm: React.Dispatch<React.SetStateAction<CareInfo>>;
-  setDisabled: React.Dispatch<React.SetStateAction<CareDisabledObj>>;
+  setForm: React.Dispatch<React.SetStateAction<CareFormType>>;
+  setDisabled: React.Dispatch<
+    React.SetStateAction<Record<keyof CareFormType, boolean>>
+  >;
+  disabled: Record<keyof CareFormType, boolean>;
 };
