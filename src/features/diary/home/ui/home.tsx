@@ -6,8 +6,10 @@ import { useWarningModal } from "@/shared/warmingModal/store/warningModalStore";
 import { sortByDate } from "../lib/sortByDate";
 import * as s from "./style";
 import { GetIcon } from "@/shared/getIcon/getIcon";
+import { useNavigate } from "react-router-dom";
 
 export function Home() {
+  const nav = useNavigate();
   const { allDiary, setAllDiary, setSelectId } = useDiary();
   const { openModal } = useWarningModal();
   useEffect(() => {
@@ -29,6 +31,7 @@ export function Home() {
                   key={obj.diaryId}
                   onClick={() => {
                     setSelectId(obj.diaryId);
+                    nav(`/diary/:${obj.diaryId}`);
                   }}
                 >
                   {obj.image === null ? (
