@@ -1,7 +1,7 @@
-import { forwardRef } from "react";
+import React, { forwardRef } from "react";
 import * as icons from "@/shared/getIcon/icons";
 
-export interface IconProps {
+export interface IconProps extends React.SVGProps<SVGSVGElement> {
   name: keyof typeof icons;
   width: number;
   onClick?: () => void;
