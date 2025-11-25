@@ -1,4 +1,4 @@
-export async function handleNotification(
+export async function setNotification(
   toggleResult: boolean,
   openModal: (message: string) => void,
 ) {
