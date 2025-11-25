@@ -4,8 +4,8 @@ import { useDiaryDetail } from "../store/diaryDetailstore";
 import { getDetail } from "../lib/getDetail";
 import { dateToString } from "@/shared/DateToString/dateToString";
 import { Carousel } from "@/shared/carousel/carousel";
-import * as s from "./style";
 import { useNavigate } from "react-router-dom";
+import * as s from "./style";
 
 export function DiaryDetail() {
   const { diaryDetail, setDiaryDetail } = useDiaryDetail();
@@ -25,7 +25,9 @@ export function DiaryDetail() {
         {diaryDate}
       </BackButton>
       <s.DiarySection>
-        <section>{<Carousel imgs={diaryDetail.images} />}</section>
+        {diaryDetail.images.length !== 0 && (
+          <Carousel imgs={diaryDetail.images} />
+        )}
         <section>
           <s.TitleBox>
             <p>{diaryDetail.title}</p>
