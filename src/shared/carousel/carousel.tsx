@@ -3,20 +3,20 @@ import type { EmblaOptionsType } from "embla-carousel";
 import * as s from "./style";
 import { useDotBtn } from "./dotBtn";
 
-export function Carousel(props: { imgs: string[] }) {
-  const { imgs } = props;
+export function Carousel(props: { imgs: string[]; width: number }) {
+  const { imgs, width } = props;
   const options: EmblaOptionsType = {};
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotBtn(emblaApi);
 
   return (
-    <s.Embla>
+    <s.Embla $width={width}>
       <s.EmblaViewport ref={emblaRef}>
         <s.EmblaContainer>
           {imgs.map((img) => (
             <s.EmblaSlide key={img}>
-              <s.Img src={img} />
+              <s.Img src={img} $width={width} />
             </s.EmblaSlide>
           ))}
         </s.EmblaContainer>

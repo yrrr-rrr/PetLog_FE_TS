@@ -1,14 +1,15 @@
 import styled from "styled-components";
 
-export const Img = styled.img`
-  width: 100%;
-  height: 100%;
+export const Img = styled.img<{ $width: number }>`
+  width: ${({ $width }) => $width}px;
+  height: ${({ $width }) => $width}px;
   border-radius: 20px;
   cursor: pointer;
 `;
 
-export const Embla = styled.section`
-  width: 400px;
+export const Embla = styled.section<{ $width: number }>`
+  width: ${({ $width }) => $width}px;
+
   border-radius: 20px;
   --slide-height: 19rem;
   --slide-spacing: 1rem;
@@ -18,11 +19,13 @@ export const Embla = styled.section`
 export const EmblaViewport = styled.div`
   overflow: hidden;
 `;
+
 export const EmblaContainer = styled.div`
   display: flex;
   touch-action: pan-y pinch-zoom;
   margin-left: calc(var(--slide-spacing) * -1);
 `;
+
 export const EmblaSlide = styled.div`
   transform: translate3d(0, 0, 0);
   flex: 0 0 var(--slide-size);

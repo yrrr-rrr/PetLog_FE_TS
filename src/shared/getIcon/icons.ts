@@ -6,3 +6,6 @@ export { default as Key } from "@/assets/key.svg?react";
 export { default as Group } from "@/assets/group.svg?react";
 export { default as RightArrow } from "@/assets/rightArrow.svg?react";
 export { default as DefaultIcon } from "@/assets/defaultIcon.svg?react";
+export { default as AddPicture } from "@/assets/addPicture.svg?react";
+export { default as DeleteBtn } from "@/assets/delete.svg?react";
+export { default as Calendar } from "@/assets/calendar.svg?react";

@@ -1,3 +1,5 @@
+import { AddContent } from "@/features/diary/add/ui/addContent/addContent";
+import { AddPicture } from "@/features/diary/add/ui/addPicture/addPicture";
 import { DiaryDetail } from "@/features/diary/detail/ui/diaryDetail";
 import { Home } from "@/features/diary/home/ui/home";
 import { GroupEtry } from "@/features/groupEntry/ui/groupEntry";
@@ -30,5 +32,13 @@ export const router = createBrowserRouter([
   {
     path: "diary/:diaryId",
     element: <DiaryDetail />,
+  },
+  {
+    path: "adddiary/pictures",
+    element: <AddPicture />,
+  },
+  {
+    path: "adddiary/content",
+    element: <AddContent />,
   },
 ]);
