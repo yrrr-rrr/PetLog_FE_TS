@@ -6,12 +6,19 @@ import * as s from "./style";
 import { useWarningModal } from "@/shared/warmingModal/store/warningModalStore";
 import { WarningModal } from "@/shared/warmingModal/ui/warningModal";
 import { BackButton } from "@/shared/backBtn/BackButton";
+import { useEffect } from "react";
+import { login } from "@/features/tempLogin/login";
+import { useLogin } from "@/features/tempLogin/loginStore";
 
 export function MakeGroup() {
   const { step, setStep } = useForm();
   const { isOpen } = useWarningModal();
+  const { setLogin, acc } = useLogin();
   const pageInfoText = ["반려동물 기본 정보", "케어 정보"];
   const nav = useNavigate();
+  useEffect(() => {
+    login(setLogin);
+  }, [setLogin]);
   return (
     <s.Main>
       <s.PageTitleSection>
