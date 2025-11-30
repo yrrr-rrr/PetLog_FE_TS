@@ -8,10 +8,6 @@ export type AddDiaryType = {
 
 type AddDiaryStoreType = {
   addDiary: AddDiaryType;
-  fileImgs: File[];
-  previewImgs: string[];
-  setPreviewImgs: (imgs: string[]) => void;
-  setImgs: (imgs: File[]) => void;
   setDiary: (obj: AddDiaryType) => void;
 };
 
@@ -21,16 +17,6 @@ export const useAddDiary = create<AddDiaryStoreType>((set) => ({
     writeAt: new Date(),
     content: "",
   },
-  fileImgs: [],
-  previewImgs: [],
-  setPreviewImgs: (imgs) =>
-    set(() => ({
-      previewImgs: imgs,
-    })),
-  setImgs: (imgs) =>
-    set(() => ({
-      fileImgs: imgs,
-    })),
   setDiary: (obj) =>
     set(() => ({
       addDiary: obj,
