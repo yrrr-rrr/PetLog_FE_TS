@@ -23,6 +23,8 @@ export function handleOnChange<T extends keyof PetInfo | keyof CareFormType>(
     const newObj = { ...prev };
     if (!value) {
       newObj[type] = true;
+    } else {
+      newObj[type] = false;
     }
     if (typeof value === "number") {
       newObj[type] = !checkDate(type, value);
