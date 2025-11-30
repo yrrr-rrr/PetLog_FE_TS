@@ -86,3 +86,19 @@ export const DefaultImg = styled.div`
   align-items: center;
   background-color: ${({ theme }) => theme.color.gray_5};
 `;
+
+export const PlusBtn = styled.div`
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  transform: rotate(45deg);
+  background-color: ${({ theme }) => theme.color.yellow};
+  z-index: 3;
+  cursor: pointer;
+`;

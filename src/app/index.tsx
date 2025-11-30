@@ -1,4 +1,3 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router";
@@ -7,10 +6,8 @@ import { theme } from "@/shared/styles/theme";
 import { GlobalStyle } from "@/shared/styles/global";
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <RouterProvider router={router} />
-    </ThemeProvider>
-  </StrictMode>,
+  <ThemeProvider theme={theme}>
+    <GlobalStyle />
+    <RouterProvider router={router} />
+  </ThemeProvider>,
 );

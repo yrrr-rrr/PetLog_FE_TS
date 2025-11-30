@@ -1,4 +1,5 @@
 export async function addDiary(
+  type: string,
   title: string,
   content: string,
   imgs: File[],
@@ -7,7 +8,7 @@ export async function addDiary(
 ) {
   try {
     const response = await fetch("", {
-      method: "POST",
+      method: type == "add" ? "POST" : "PATCH",
       headers: {
         "Content-Type": "application/json",
       },

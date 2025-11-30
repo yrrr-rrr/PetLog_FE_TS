@@ -14,8 +14,8 @@ export function Carousel(props: { imgs: string[]; width: number }) {
     <s.Embla $width={width}>
       <s.EmblaViewport ref={emblaRef}>
         <s.EmblaContainer>
-          {imgs.map((img) => (
-            <s.EmblaSlide key={img}>
+          {imgs.map((img, idx) => (
+            <s.EmblaSlide key={idx}>
               <s.Img src={img} $width={width} />
             </s.EmblaSlide>
           ))}

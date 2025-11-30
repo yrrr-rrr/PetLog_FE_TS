@@ -32,7 +32,13 @@ export function DiaryDetail() {
           <s.TitleBox>
             <p>{diaryDetail.title}</p>
             <s.ActionBox>
-              <p>수정</p>
+              <p
+                onClick={() => {
+                  nav("/editdiary/pictures");
+                }}
+              >
+                수정
+              </p>
               <p>삭제</p>
             </s.ActionBox>
           </s.TitleBox>

@@ -41,4 +41,12 @@ export const router = createBrowserRouter([
     path: "adddiary/content",
     element: <AddContent />,
   },
+  {
+    path: "editdiary/pictures",
+    element: <AddPicture />,
+  },
+  {
+    path: "editdiary/content",
+    element: <AddContent />,
+  },
 ]);
