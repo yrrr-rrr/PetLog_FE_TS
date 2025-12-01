@@ -11,7 +11,7 @@ export const Btn = styled.button<{ $disabled: boolean; $color: string }>`
   justify-content: center;
   align-items: center;
   background-color: ${({ theme, $disabled, $color }) =>
-    $color
+    $color !== ""
       ? $color == "yellow"
         ? theme.color.yellow
         : theme.color.gray_2
