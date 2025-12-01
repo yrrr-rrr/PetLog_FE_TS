@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Main = styled.main`
   gap: 240px;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -49,6 +49,6 @@ export const Input = styled.input`
 
 export const WarningMassage = styled.p`
   color: ${({ theme }) => theme.color.red};
-  font-size: ${({ theme }) => theme.font.description};
-  font-weight: ${({ theme }) => theme.font.weightRegular};
+  font-size: ${({ theme }) => theme.font.body_S};
+  font-weight: ${({ theme }) => theme.font.weightBold};
 `;
