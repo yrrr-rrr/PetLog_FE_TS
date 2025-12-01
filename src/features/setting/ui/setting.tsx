@@ -8,15 +8,28 @@ import { logout } from "../lib/logout";
 import { BackButton } from "@/shared/backBtn/BackButton";
 import * as s from "./style";
 import { getNotification } from "../lib/getNotification";
+import { getGroupId } from "@/shared/getGroupid/getGroupId";
 
 export function Setting() {
   const { openModal } = useWarningModal();
   const [toggle, setToggle] = useState(false);
   const nav = useNavigate();
+  const acc = localStorage.getItem("acc");
+  const [groupId, setGroupId] = useState(0);
 
   useEffect(() => {
-    getNotification(setToggle, openModal);
-  }, [openModal]);
+    if (!acc) {
+      return;
+    }
+    getNotification(setToggle, openModal, acc);
+  }, [acc, openModal]);
+
+  useEffect(() => {
+    if (!acc) {
+      return;
+    }
+    getGroupId(setGroupId, acc);
+  }, [acc]);
 
   return (
     <s.Main>
@@ -33,8 +46,11 @@ export function Setting() {
           <s.Toggle
             $toggle={toggle}
             onClick={() => {
+              if (!acc) {
+                return;
+              }
+              setNotification(!toggle, openModal, acc);
               setToggle((prev) => !prev);
-              setNotification(toggle, openModal);
             }}
           >
             <div></div>
@@ -42,13 +58,19 @@ export function Setting() {
         </s.Li>
         <s.Li
           onClick={() => {
-            leaveGroup(openModal);
+            if (!acc) {
+              return;
+            }
+            leaveGroup(openModal, acc, groupId, nav);
           }}
         >
           그룹 나가기
         </s.Li>
         <s.Li
           onClick={() => {
+            if (!acc) {
+              return;
+            }
             logout(nav);
           }}
         >
@@ -57,7 +79,10 @@ export function Setting() {
       </s.Ul>
       <s.WithdrawBox
         onClick={() => {
-          deleteAccount(openModal);
+          if (!acc) {
+            return;
+          }
+          deleteAccount();
         }}
       >
         탈퇴 하기

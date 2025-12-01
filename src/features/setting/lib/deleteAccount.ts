@@ -1,12 +1,3 @@
-export async function deleteAccount(openModal: (message: string) => void) {
-  try {
-    const response = await fetch("", {
-      method: "DELETE",
-    });
-    if (!response.ok) {
-      openModal("전송 오류가 발생했습니다");
-    }
-  } catch (e) {
-    openModal("전송 오류가 발생했습니다");
-  }
+export function deleteAccount() {
+  // 액세스, 리프레쉬 토큰 다 지우고 로그인 화면으로 이동
 }

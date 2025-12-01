@@ -5,12 +5,15 @@ import { WarningModal } from "@/shared/warmingModal/ui/warningModal";
 import * as s from "./style";
 import { BackButton } from "@/shared/backBtn/BackButton";
 import { useNavigate } from "react-router-dom";
+import { joinGroup } from "../lib/joinGroup";
 
 export function JoinGroup() {
   const { openModal, isOpen } = useWarningModal();
   const [isReject, setIsReject] = useState(false);
   const [code, setCode] = useState("");
   const nav = useNavigate();
+  const acc = localStorage.getItem("acc");
+
   return (
     <s.Main>
       <BackButton
@@ -41,8 +44,11 @@ export function JoinGroup() {
         <Button
           disabled={false}
           onClick={() => {
+            if (!acc) {
+              return;
+            }
             setIsReject(false);
-            joinGroup(code, setIsReject, openModal);
+            joinGroup(code, setIsReject, openModal, acc);
           }}
         >
           확인
@@ -50,27 +56,4 @@ export function JoinGroup() {
       </s.CodeSection>
     </s.Main>
   );
-}
-
-async function joinGroup(
-  code: string,
-  setIsReject: React.Dispatch<React.SetStateAction<boolean>>,
-  openModal: (message: string) => void,
-) {
-  try {
-    const response = await fetch("", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        joinCode: code,
-      }),
-    });
-    if (!response.ok) {
-      setIsReject(true);
-    }
-  } catch (e) {
-    openModal("전송 오류가 발생했습니다");
-  }
 }
