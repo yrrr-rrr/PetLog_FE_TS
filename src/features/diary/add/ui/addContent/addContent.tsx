@@ -5,15 +5,19 @@ import { Button } from "@/shared/button/button";
 import * as s from "./style";
 import { useLocation, useNavigate } from "react-router-dom";
 import { dateToString } from "@/shared/DateToString/dateToString";
-import { stringToDate } from "@/shared/stringToDate/stringToDate";
 import { useWarningModal } from "@/shared/warmingModal/store/warningModalStore";
 import { addDiary } from "../../lib/addDiary";
 import { useAddImgs } from "../../store/imgStore";
 import { useDiaryDetail } from "@/features/diary/detail/store/diaryDetailstore";
+import { handleS3ImgUrl } from "@/shared/s3/handleS3ImgUrl";
+import { getExistImgs, getNewImgs } from "../../lib/getImgs";
+import { useDiary } from "@/features/diary/home/store/diaryStore";
+import { formatYYYYMMDD } from "@/shared/formatYYYYMMDD/formatYYYYMMDD";
 
 export function AddContent() {
   const { imgs } = useAddImgs();
   const { diaryDetail } = useDiaryDetail();
+  const { groupId } = useDiary();
   const { openModal } = useWarningModal();
   const param = useLocation().pathname.split("/")[1];
   const calendarRef = useRef<HTMLInputElement | null>(null);
@@ -30,6 +34,7 @@ export function AddContent() {
   );
   const nav = useNavigate();
   const previewImgs = imgs.filter((x) => !x.isDeleted).map((x) => x.previewUrl);
+  const acc = localStorage.getItem("acc");
 
   return (
     <s.Main>
@@ -94,10 +99,24 @@ export function AddContent() {
         ></s.Content>
         <s.BtnBox>
           <Button
-            onClick={() => {
-              console.log(title, content, imgs, date);
-              //  imgObj에서 s3 링크 뽑아내기 (수정일 땨는 status가 new인 이미지만 필터로 뽑아서 s3 돌리고 concat으로 붙여서 post )
-              // addDiary(type, title, content, [], stringToDate(date), openModal);
+            onClick={async () => {
+              if (!acc) {
+                return;
+              }
+              const newImgArr = getNewImgs(imgs);
+              const existImgArr = getExistImgs(imgs);
+              const url = await handleS3ImgUrl(newImgArr, acc, "DIARY_IMAGE");
+              const finalImgArr = existImgArr.concat(url);
+              addDiary(
+                param == "editdiary" ? "edit" : "add",
+                title,
+                content,
+                finalImgArr ? finalImgArr : null,
+                formatYYYYMMDD(date),
+                openModal,
+                acc,
+                groupId,
+              );
             }}
           >
             저장
