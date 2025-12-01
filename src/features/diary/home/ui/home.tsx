@@ -1,6 +1,6 @@
 import { BackButton } from "@/shared/backBtn/BackButton";
 import { useDiary } from "../store/diaryStore";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { getAllDiary } from "../lib/getAllDiary";
 import { useWarningModal } from "@/shared/warmingModal/store/warningModalStore";
 import { sortByDate } from "../lib/sortByDate";
@@ -9,6 +9,8 @@ import { GetIcon } from "@/shared/getIcon/getIcon";
 import { useNavigate } from "react-router-dom";
 import { useAddImgs } from "../../add/store/imgStore";
 import { getGroupId } from "@/shared/getGroupid/getGroupId";
+import { useLogin } from "@/features/tempLogin/loginStore";
+import { login } from "@/features/tempLogin/login";
 
 export function Home() {
   const nav = useNavigate();
@@ -16,11 +18,19 @@ export function Home() {
   const { allDiary, setAllDiary, setSelectId, setGroupId, groupId } =
     useDiary();
   const { openModal } = useWarningModal();
+  const acc2 = localStorage.getItem("acc");
+  // const { ref, acc, setLogin } = useLogin(); // 왜 스토어에 acc 없지..
 
   useEffect(() => {
-    getGroupId(setGroupId);
-    getAllDiary(setAllDiary, openModal, groupId);
-  }, [groupId, openModal, setAllDiary, setGroupId]);
+    if (!acc2) {
+      return;
+    }
+    const getData = async () => {
+      const id = await getGroupId(setGroupId, acc2);
+      await getAllDiary(setAllDiary, openModal, id, acc2);
+    };
+    getData();
+  }, [acc2, openModal, setAllDiary, setGroupId]);
 
   useEffect(() => {
     setInitStore();
