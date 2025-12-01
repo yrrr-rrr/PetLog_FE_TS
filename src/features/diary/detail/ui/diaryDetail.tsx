@@ -10,6 +10,7 @@ import { useModal } from "@/shared/baseModal/store/modalStroe";
 import { BaseModal } from "@/shared/baseModal/ui/baseModal";
 import { useDiary } from "../../home/store/diaryStore";
 import { deleteDiary } from "../lib/deleteDiary";
+import { Header } from "@/app/header/header";
 export function DiaryDetail() {
   const { diaryDetail, setDiaryDetail } = useDiaryDetail();
   const { groupId, diaryId } = useDiary();
@@ -26,54 +27,57 @@ export function DiaryDetail() {
   }, [acc, diaryId, groupId, setDiaryDetail]);
 
   return (
-    <s.Main>
-      <BackButton
-        onClick={() => {
-          nav(-1);
-        }}
-      >
-        {diaryDate}
-      </BackButton>
-      <s.DiarySection>
-        {diaryDetail.images.length !== 0 && (
-          <Carousel imgs={diaryDetail.images} width={400} />
-        )}
-        <section>
-          <s.TitleBox>
-            <p>{diaryDetail.title}</p>
-            <s.ActionBox>
-              <p
-                onClick={() => {
-                  nav("/editdiary/pictures");
-                }}
-              >
-                수정
-              </p>
-              <p
-                onClick={() => {
-                  setIsOpen();
-                }}
-              >
-                삭제
-              </p>
-            </s.ActionBox>
-          </s.TitleBox>
-          <s.DateText>{diaryDate}</s.DateText>
-          <s.Content>{diaryDetail.content}</s.Content>
-        </section>
-      </s.DiarySection>
-      {isOpen && (
-        <BaseModal
-          message='"현재 일기를 삭제 하시겠습니까?"'
+    <>
+      <Header />
+      <s.Main>
+        <BackButton
           onClick={() => {
-            if (!acc) {
-              return;
-            }
-            // console.log("a");
-            deleteDiary(groupId, Number(diaryId), acc, nav);
+            nav(-1);
           }}
-        />
-      )}
-    </s.Main>
+        >
+          {diaryDate}
+        </BackButton>
+        <s.DiarySection>
+          {diaryDetail.images.length !== 0 && (
+            <Carousel imgs={diaryDetail.images} width={400} />
+          )}
+          <section>
+            <s.TitleBox>
+              <p>{diaryDetail.title}</p>
+              <s.ActionBox>
+                <p
+                  onClick={() => {
+                    nav("/editdiary/pictures");
+                  }}
+                >
+                  수정
+                </p>
+                <p
+                  onClick={() => {
+                    setIsOpen();
+                  }}
+                >
+                  삭제
+                </p>
+              </s.ActionBox>
+            </s.TitleBox>
+            <s.DateText>{diaryDate}</s.DateText>
+            <s.Content>{diaryDetail.content}</s.Content>
+          </section>
+        </s.DiarySection>
+        {isOpen && (
+          <BaseModal
+            message='"현재 일기를 삭제 하시겠습니까?"'
+            onClick={() => {
+              if (!acc) {
+                return;
+              }
+              // console.log("a");
+              deleteDiary(groupId, Number(diaryId), acc, nav);
+            }}
+          />
+        )}
+      </s.Main>
+    </>
   );
 }

@@ -9,6 +9,7 @@ import { BackButton } from "@/shared/backBtn/BackButton";
 import { useEffect } from "react";
 import { login } from "@/features/tempLogin/login";
 import { useLogin } from "@/features/tempLogin/loginStore";
+import { Header } from "@/app/header/header";
 
 export function MakeGroup() {
   const { step, setStep } = useForm();
@@ -20,26 +21,29 @@ export function MakeGroup() {
     login(setLogin);
   }, [setLogin]);
   return (
-    <s.Main>
-      <s.PageTitleSection>
-        <BackButton
-          onClick={() => {
-            nav(-1);
-            if (step === 2) {
-              setStep("prev");
-            }
-          }}
-        >
-          {pageInfoText[step - 1]}
-        </BackButton>
-        <s.TextSection>
-          <s.Notice>
-            <span>*</span>표시가 있는 항목은 반드시 입력해야 합니다
-          </s.Notice>
-        </s.TextSection>
-      </s.PageTitleSection>
-      {isOpen && <WarningModal />}
-      {step === 1 ? <PetInfoForm /> : <CareInfoForm />}
-    </s.Main>
+    <>
+      <Header />
+      <s.Main>
+        <s.PageTitleSection>
+          <BackButton
+            onClick={() => {
+              nav(-1);
+              if (step === 2) {
+                setStep("prev");
+              }
+            }}
+          >
+            {pageInfoText[step - 1]}
+          </BackButton>
+          <s.TextSection>
+            <s.Notice>
+              <span>*</span>표시가 있는 항목은 반드시 입력해야 합니다
+            </s.Notice>
+          </s.TextSection>
+        </s.PageTitleSection>
+        {isOpen && <WarningModal />}
+        {step === 1 ? <PetInfoForm /> : <CareInfoForm />}
+      </s.Main>
+    </>
   );
 }

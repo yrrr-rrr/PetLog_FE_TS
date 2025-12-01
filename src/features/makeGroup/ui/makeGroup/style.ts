@@ -2,6 +2,7 @@ import { GetIcon } from "@/shared/getIcon/getIcon";
 import styled from "styled-components";
 
 export const Main = styled.main`
+  margin-top: 60px;
   gap: 28px;
   width: 100%;
   height: 100%;

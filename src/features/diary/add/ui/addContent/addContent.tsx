@@ -14,6 +14,7 @@ import { getExistImgs, getNewImgs } from "../../lib/getImgs";
 import { useDiary } from "@/features/diary/home/store/diaryStore";
 import { formatYYYYMMDD } from "@/shared/formatYYYYMMDD/formatYYYYMMDD";
 import { handleInput } from "../../lib/handleInput";
+import { Header } from "@/app/header/header";
 
 export function AddContent() {
   const { imgs } = useAddImgs();
@@ -36,99 +37,102 @@ export function AddContent() {
   const acc = localStorage.getItem("acc");
 
   return (
-    <s.Main>
-      <BackButton
-        onClick={() => {
-          nav(-1);
-        }}
-      >
-        {""}
-      </BackButton>
-      <s.ContentSection>
-        {imgs.length !== 0 && <Carousel imgs={previewImgs} width={200} />}
-        <s.TitleBox>
-          <s.Div>
-            <s.Title
-              type="text"
-              placeholder={
-                currentPage == "edit"
-                  ? placeholder.title
-                  : "제목을 입력해 주세요"
-              }
-              maxLength={10}
-              onChange={(e) => {
-                const value = e.target.value;
-                setTitle(value);
-              }}
-            />
-            <s.CalendarInput
-              type="date"
-              ref={calendarRef}
-              value={
-                currentPage == "edit"
-                  ? placeholder.writtenAt
-                  : new Date().toISOString().split("T")[0]
-              }
-              onChange={(e) => {
-                const value = e.target.value;
-                setDate(value);
-              }}
-            />
-            <s.CalendarIcon
-              name="Calendar"
-              width={24}
-              onClick={() => {
-                calendarRef.current?.showPicker();
-              }}
-            />
-          </s.Div>
-          <s.Date>{dateToString(date)}</s.Date>
-        </s.TitleBox>
-        <s.Content
-          placeholder={
-            currentPage == "edit"
-              ? placeholder.content
-              : "일기 내용을 입력해 주세요"
-          }
-          maxLength={3000}
-          onChange={(e) => {
-            const value = e.target.value;
-            setContent(value);
+    <>
+      <Header />
+      <s.Main>
+        <BackButton
+          onClick={() => {
+            nav(-1);
           }}
-        ></s.Content>
-        <s.BtnBox>
-          <Button
-            onClick={async () => {
-              if (!acc) {
-                return;
-              }
-              const newImgArr = getNewImgs(imgs);
-              const existImgArr = getExistImgs(imgs);
-              const url = await handleS3ImgUrl(newImgArr, acc, "DIARY_IMAGE");
-              const finalImgArr = existImgArr.concat(url);
-              addDiary(
-                param == "editdiary" ? "edit" : "add",
-                handleInput(title, placeholder.title, currentPage),
-                handleInput(content, placeholder.content, currentPage),
-                finalImgArr ? finalImgArr : null,
-                formatYYYYMMDD(date),
-                openModal,
-                acc,
-                groupId,
-                diaryId,
-                nav,
-              );
-            }}
-            disabled={
-              (title || placeholder.title) && (content || placeholder.content)
-                ? false
-                : true
+        >
+          {""}
+        </BackButton>
+        <s.ContentSection>
+          {imgs.length !== 0 && <Carousel imgs={previewImgs} width={200} />}
+          <s.TitleBox>
+            <s.Div>
+              <s.Title
+                type="text"
+                placeholder={
+                  currentPage == "edit"
+                    ? placeholder.title
+                    : "제목을 입력해 주세요"
+                }
+                maxLength={10}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setTitle(value);
+                }}
+              />
+              <s.CalendarInput
+                type="date"
+                ref={calendarRef}
+                value={
+                  currentPage == "edit"
+                    ? placeholder.writtenAt
+                    : new Date().toISOString().split("T")[0]
+                }
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setDate(value);
+                }}
+              />
+              <s.CalendarIcon
+                name="Calendar"
+                width={24}
+                onClick={() => {
+                  calendarRef.current?.showPicker();
+                }}
+              />
+            </s.Div>
+            <s.Date>{dateToString(date)}</s.Date>
+          </s.TitleBox>
+          <s.Content
+            placeholder={
+              currentPage == "edit"
+                ? placeholder.content
+                : "일기 내용을 입력해 주세요"
             }
-          >
-            저장
-          </Button>
-        </s.BtnBox>
-      </s.ContentSection>
-    </s.Main>
+            maxLength={3000}
+            onChange={(e) => {
+              const value = e.target.value;
+              setContent(value);
+            }}
+          ></s.Content>
+          <s.BtnBox>
+            <Button
+              onClick={async () => {
+                if (!acc) {
+                  return;
+                }
+                const newImgArr = getNewImgs(imgs);
+                const existImgArr = getExistImgs(imgs);
+                const url = await handleS3ImgUrl(newImgArr, acc, "DIARY_IMAGE");
+                const finalImgArr = existImgArr.concat(url);
+                addDiary(
+                  param == "editdiary" ? "edit" : "add",
+                  handleInput(title, placeholder.title, currentPage),
+                  handleInput(content, placeholder.content, currentPage),
+                  finalImgArr ? finalImgArr : null,
+                  formatYYYYMMDD(date),
+                  openModal,
+                  acc,
+                  groupId,
+                  diaryId,
+                  nav,
+                );
+              }}
+              disabled={
+                (title || placeholder.title) && (content || placeholder.content)
+                  ? false
+                  : true
+              }
+            >
+              저장
+            </Button>
+          </s.BtnBox>
+        </s.ContentSection>
+      </s.Main>
+    </>
   );
 }

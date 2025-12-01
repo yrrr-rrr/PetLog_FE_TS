@@ -2,29 +2,33 @@ import { GetIcon } from "@/shared/getIcon/getIcon";
 import type * as icons from "@/shared/getIcon/icons";
 import * as s from "./style";
 import { useNavigate, type NavigateFunction } from "react-router-dom";
+import { Header } from "@/app/header/header";
 
 export function GroupEtry() {
   const nav = useNavigate();
   return (
-    <s.Main>
-      <s.Title>반려 기록 시작하기</s.Title>
-      <s.ChoiceSection>
-        {getChoice(
-          "Group",
-          "그룹 만들기",
-          "그룹을 만들고 다른 보호자를 초대해 보세요",
-          "makeGroup",
-          nav,
-        )}
-        {getChoice(
-          "Key",
-          "초대 코드로 참여하기",
-          "그룹원에게 받은 초대 코드로 참여하세요",
-          "joinGroup",
-          nav,
-        )}
-      </s.ChoiceSection>
-    </s.Main>
+    <>
+      <Header />
+      <s.Main>
+        <s.Title>반려 기록 시작하기</s.Title>
+        <s.ChoiceSection>
+          {getChoice(
+            "Group",
+            "그룹 만들기",
+            "그룹을 만들고 다른 보호자를 초대해 보세요",
+            "makeGroup",
+            nav,
+          )}
+          {getChoice(
+            "Key",
+            "초대 코드로 참여하기",
+            "그룹원에게 받은 초대 코드로 참여하세요",
+            "joinGroup",
+            nav,
+          )}
+        </s.ChoiceSection>
+      </s.Main>
+    </>
   );
 }
 
