@@ -15,11 +15,12 @@ export const GlobalStyle = createGlobalStyle`
   body{
     margin: 0;
     width: 440px;
+    height: 100%;
+    min-height: 100vh;
     font-family: ${({ theme }) => theme.font.family}; 
+    background-color: ${({ theme }) => theme.color.white};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: ${({ theme }) => theme.color.white};
-    border: 1px solid black;
   }
   ul{
     list-style: none;

@@ -12,6 +12,7 @@ import { getGroupId } from "@/shared/getGroupid/getGroupId";
 // import { useLogin } from "@/features/tempLogin/loginStore";
 // import { login } from "@/features/tempLogin/login";
 import { useModal } from "@/shared/baseModal/store/modalStroe";
+import { Header } from "@/app/header/header";
 
 export function Home() {
   const nav = useNavigate();
@@ -38,48 +39,51 @@ export function Home() {
     setInitStore();
   }, [setInitStore]);
 
-  const dieries = Object.entries(sortByDate(allDiary));
+  const dieries = Object.entries(sortByDate(allDiary)).reverse();
 
   return (
-    <s.Main>
-      <BackButton>성장 일기</BackButton>
-      <s.PlusBtn
-        onClick={() => {
-          nav("/adddiary/pictures");
-        }}
-      >
-        <GetIcon name="DeleteBtn" width={24} />
-      </s.PlusBtn>
-      <s.Diarysection>
-        {dieries.map((arr) => (
-          <s.DiariesByDate key={arr[0]}>
-            <s.Date>{arr[0]}</s.Date>
-            <s.ThumbnailBox>
-              {arr[1][0].diaryInfo.map((obj) => (
-                <s.Thumbnail
-                  key={obj.diaryId}
-                  onClick={() => {
-                    setDiaryId(obj.diaryId);
-                    nav(`/diary/:${obj.diaryId}`);
-                  }}
-                >
-                  {obj.image === null ? (
-                    <s.DefaultImg>
-                      <GetIcon name="DefaultIcon" width={80} />
-                    </s.DefaultImg>
-                  ) : (
-                    <s.ImgBox>
-                      <s.ThumbnailImg src={obj.image} alt="" />
-                      <div></div>
-                    </s.ImgBox>
-                  )}
-                  <s.Title>{obj.title}</s.Title>
-                </s.Thumbnail>
-              ))}
-            </s.ThumbnailBox>
-          </s.DiariesByDate>
-        ))}
-      </s.Diarysection>
-    </s.Main>
+    <>
+      <Header />
+      <s.Main>
+        <BackButton>성장 일기</BackButton>
+        <s.PlusBtn
+          onClick={() => {
+            nav("/adddiary/pictures");
+          }}
+        >
+          <GetIcon name="DeleteBtn" width={24} />
+        </s.PlusBtn>
+        <s.Diarysection>
+          {dieries.map((arr) => (
+            <s.DiariesByDate key={arr[0]}>
+              <s.Date>{arr[0]}</s.Date>
+              <s.ThumbnailBox>
+                {arr[1][0].diaryInfo.map((obj) => (
+                  <s.Thumbnail
+                    key={obj.diaryId}
+                    onClick={() => {
+                      setDiaryId(obj.diaryId);
+                      nav(`/diary/:${obj.diaryId}`);
+                    }}
+                  >
+                    {obj.image === null ? (
+                      <s.DefaultImg>
+                        <GetIcon name="DefaultIcon" width={80} />
+                      </s.DefaultImg>
+                    ) : (
+                      <s.ImgBox>
+                        <s.ThumbnailImg src={obj.image} alt="" />
+                        <div></div>
+                      </s.ImgBox>
+                    )}
+                    <s.Title>{obj.title}</s.Title>
+                  </s.Thumbnail>
+                ))}
+              </s.ThumbnailBox>
+            </s.DiariesByDate>
+          ))}
+        </s.Diarysection>
+      </s.Main>
+    </>
   );
 }
