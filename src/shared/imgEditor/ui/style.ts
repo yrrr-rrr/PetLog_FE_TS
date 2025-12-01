@@ -1,5 +1,5 @@
+import { GetIcon } from "@/shared/getIcon/getIcon";
 import styled from "styled-components";
-import { GetIcon } from "../getIcon/getIcon";
 
 export const AddImgBox = styled.div`
   gap: 24px;

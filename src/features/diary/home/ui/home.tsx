@@ -8,16 +8,19 @@ import * as s from "./style";
 import { GetIcon } from "@/shared/getIcon/getIcon";
 import { useNavigate } from "react-router-dom";
 import { useAddImgs } from "../../add/store/imgStore";
+import { getGroupId } from "@/shared/getGroupid/getGroupId";
 
 export function Home() {
   const nav = useNavigate();
   const { setInitStore } = useAddImgs();
-  const { allDiary, setAllDiary, setSelectId } = useDiary();
+  const { allDiary, setAllDiary, setSelectId, setGroupId, groupId } =
+    useDiary();
   const { openModal } = useWarningModal();
 
   useEffect(() => {
-    getAllDiary(setAllDiary, openModal);
-  }, [openModal, setAllDiary]);
+    getGroupId(setGroupId);
+    getAllDiary(setAllDiary, openModal, groupId);
+  }, [groupId, openModal, setAllDiary, setGroupId]);
 
   useEffect(() => {
     setInitStore();

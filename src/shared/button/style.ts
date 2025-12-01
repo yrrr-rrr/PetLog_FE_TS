@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Btn = styled.button<{ $disabled: boolean }>`
+export const Btn = styled.button<{ $disabled: boolean; $color: string }>`
   width: 100px;
   height: 40px;
   border: 1px solid
@@ -10,8 +10,14 @@ export const Btn = styled.button<{ $disabled: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ theme, $disabled }) =>
-    $disabled ? theme.color.gray_2 : theme.color.yellow};
+  background-color: ${({ theme, $disabled, $color }) =>
+    $color
+      ? $color == "yellow"
+        ? theme.color.yellow
+        : theme.color.gray_2
+      : $disabled
+        ? theme.color.gray_2
+        : theme.color.yellow};
 
   color: ${({ theme, $disabled }) =>
     $disabled ? theme.color.gray_4 : theme.color.black};

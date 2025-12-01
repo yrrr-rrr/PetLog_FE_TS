@@ -4,16 +4,23 @@ import { useDiaryDetail } from "../store/diaryDetailstore";
 import { getDetail } from "../lib/getDetail";
 import { dateToString } from "@/shared/DateToString/dateToString";
 import { Carousel } from "@/shared/carousel/carousel";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import * as s from "./style";
-
+import { useModal } from "@/shared/baseModal/store/modalStroe";
+import { BaseModal } from "@/shared/baseModal/ui/baseModal";
+import { useDiary } from "../../home/store/diaryStore";
+import { deleteDiary } from "../lib/deleteDiary";
 export function DiaryDetail() {
   const { diaryDetail, setDiaryDetail } = useDiaryDetail();
+  const { groupId } = useDiary();
+  const { isOpen, setIsOpen } = useModal();
+  const diaryDate = dateToString(diaryDetail.writtenAt);
+  const nav = useNavigate();
+  const diaryId = useParams().diaryId?.replace(":", "");
+
   useEffect(() => {
     getDetail(0, 0, setDiaryDetail);
   }, [setDiaryDetail]);
-  const diaryDate = dateToString(diaryDetail.writtenAt);
-  const nav = useNavigate();
 
   return (
     <s.Main>
@@ -39,13 +46,27 @@ export function DiaryDetail() {
               >
                 수정
               </p>
-              <p>삭제</p>
+              <p
+                onClick={() => {
+                  setIsOpen();
+                }}
+              >
+                삭제
+              </p>
             </s.ActionBox>
           </s.TitleBox>
           <s.DateText>{diaryDate}</s.DateText>
           <s.Content>{diaryDetail.content}</s.Content>
         </section>
       </s.DiarySection>
+      {isOpen && (
+        <BaseModal
+          message='"현재 일기를 삭제 하시겠습니까?"'
+          onClick={() => {
+            deleteDiary(groupId, Number(diaryId));
+          }}
+        />
+      )}
     </s.Main>
   );
 }

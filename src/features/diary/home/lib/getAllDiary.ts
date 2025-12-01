@@ -3,9 +3,13 @@ import type { DiaryType } from "../store/diaryStore";
 export async function getAllDiary(
   setAllDiary: (arr: DiaryType[]) => void,
   openModal: (warningMessage: string) => void,
+  groupId: number,
 ) {
   try {
-    const response = await fetch("/public/dum/home.json");
+    const response = await fetch(
+      `http://dev.petlog.site/api/groups/${groupId}/diary`,
+    );
+    // const response = await fetch("/public/dum/home.json");
     const data = await response.json();
     if (!response.ok) {
       openModal("전송 오류가 발생했습니다");

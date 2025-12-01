@@ -2,6 +2,7 @@ import { Button } from "@/shared/button/button";
 import { useWarningModal } from "../store/warningModalStore";
 import { useLocation } from "react-router-dom";
 import { useForm } from "@/features/makeGroup/store/formStore";
+import * as s from "./style";
 
 export function WarningModal() {
   const { setStep } = useForm();
@@ -9,8 +10,8 @@ export function WarningModal() {
   const path = useLocation().pathname;
 
   return (
-    <div>
-      <p>{warningMessage}</p>
+    <s.Modal>
+      <s.Message>{warningMessage}</s.Message>
       <Button
         onClick={() => {
           if (path == "/makegroup") {
@@ -21,6 +22,6 @@ export function WarningModal() {
       >
         닫기
       </Button>
-    </div>
+    </s.Modal>
   );
 }
