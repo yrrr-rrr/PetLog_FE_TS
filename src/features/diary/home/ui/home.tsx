@@ -38,7 +38,7 @@ export function Home() {
     setInitStore();
   }, [setInitStore]);
 
-  const dieries = Object.entries(sortByDate(allDiary));
+  const dieries = Object.entries(sortByDate(allDiary)).reverse();
 
   return (
     <s.Main>
