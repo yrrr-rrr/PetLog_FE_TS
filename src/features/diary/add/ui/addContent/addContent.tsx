@@ -27,7 +27,7 @@ export function AddContent() {
   const placeholder = {
     title: diaryDetail.title,
     content: diaryDetail.content,
-    writtenAt: diaryDetail.writtenAt,
+    writtenAt: diaryDetail.writtenAt.replaceAll(".", "-"),
   };
   const [date, setDate] = useState<Date | string>(new Date());
   const [title, setTitle] = useState("");
@@ -67,7 +67,7 @@ export function AddContent() {
               value={
                 currentPage == "edit"
                   ? placeholder.writtenAt
-                  : new Date().toISOString().split("T")[0]
+                  : formatYYYYMMDD(date).replaceAll(".", "-")
               }
               onChange={(e) => {
                 const value = e.target.value;
