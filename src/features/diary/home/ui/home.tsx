@@ -80,9 +80,10 @@ export function Home() {
           </s.DiariesByDate>
         ))}
         {dieries.length == 0 && (
-          <s.EmptyTextDiv>
-            <p>🌱 반려동물의 성장을 기록해보세요 🌱</p>
-          </s.EmptyTextDiv>
+          <s.EmptyDiary>
+            <GetIcon name="Pets" width={150} height={150} />
+            <p>반려동물의 성장을 기록해보세요</p>
+          </s.EmptyDiary>
         )}
       </s.Diarysection>
     </s.Main>

@@ -15,47 +15,45 @@ export function JoinGroup() {
   const acc = localStorage.getItem("acc");
 
   return (
-    <>
-      <s.Main>
-        <BackButton
+    <s.Main>
+      <BackButton
+        onClick={() => {
+          nav("-1");
+        }}
+      >
+        뒤로 가기
+      </BackButton>
+      {isOpen && <WarningModal />}
+      <s.CodeSection>
+        <s.Title>그룹원에게 받은 초대 코드를 입력해 주세요</s.Title>
+        <s.InputBox>
+          <s.Input
+            type="text"
+            maxLength={6}
+            onChange={(e) => {
+              const value = e.target.value.toUpperCase();
+              setCode(value);
+            }}
+          />
+          {isReject && (
+            <s.WarningMassage>
+              코드를 다시 한번 확인 후 입력해주세요
+            </s.WarningMassage>
+          )}
+        </s.InputBox>
+        <Button
+          disabled={false}
           onClick={() => {
-            nav("-1");
+            if (!acc) {
+              return;
+            }
+            setIsReject(false);
+            joinGroup(code, setIsReject, openModal, acc);
           }}
         >
-          뒤로 가기
-        </BackButton>
-        {isOpen && <WarningModal />}
-        <s.CodeSection>
-          <s.Title>그룹원에게 받은 초대 코드를 입력해 주세요</s.Title>
-          <s.InputBox>
-            <s.Input
-              type="text"
-              maxLength={6}
-              onChange={(e) => {
-                const value = e.target.value.toUpperCase();
-                setCode(value);
-              }}
-            />
-            {isReject && (
-              <s.WarningMassage>
-                코드를 다시 한번 확인 후 입력해주세요
-              </s.WarningMassage>
-            )}
-          </s.InputBox>
-          <Button
-            disabled={false}
-            onClick={() => {
-              if (!acc) {
-                return;
-              }
-              setIsReject(false);
-              joinGroup(code, setIsReject, openModal, acc);
-            }}
-          >
-            확인
-          </Button>
-        </s.CodeSection>
-      </s.Main>
-    </>
+          확인
+        </Button>
+      </s.CodeSection>
+    </s.Main>
   );
 }
