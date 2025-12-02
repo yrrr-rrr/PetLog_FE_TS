@@ -102,3 +102,17 @@ export const PlusBtn = styled.div`
   z-index: 3;
   cursor: pointer;
 `;
+
+export const EmptyDiary = styled.div`
+  margin-top: 50%;
+  gap: 20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: ${({ theme }) => theme.color.gray_4};
+  font-size: ${({ theme }) => theme.font.heading_L};
+  font-weight: ${({ theme }) => theme.font.weightSemiBold};
+`;
