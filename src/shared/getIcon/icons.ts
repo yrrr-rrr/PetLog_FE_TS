@@ -12,3 +12,4 @@ export { default as Calendar } from "@/assets/calendar.svg?react";
 export { default as Notice } from "@/assets/notice.svg?react";
 export { default as Invite } from "@/assets/invite.svg?react";
 export { default as Setting } from "@/assets/setting.svg?react";
+export { default as Pets } from "@/assets/pets.svg?react";

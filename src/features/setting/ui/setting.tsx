@@ -9,7 +9,6 @@ import { BackButton } from "@/shared/backBtn/BackButton";
 import * as s from "./style";
 import { getNotification } from "../lib/getNotification";
 import { getGroupId } from "@/shared/getGroupid/getGroupId";
-import { Header } from "@/app/header/header";
 
 export function Setting() {
   const { openModal } = useWarningModal();
@@ -34,7 +33,6 @@ export function Setting() {
 
   return (
     <>
-      <Header />
       <s.Main>
         <BackButton
           onClick={() => {

@@ -12,7 +12,6 @@ import { getGroupId } from "@/shared/getGroupid/getGroupId";
 // import { useLogin } from "@/features/tempLogin/loginStore";
 // import { login } from "@/features/tempLogin/login";
 import { useModal } from "@/shared/baseModal/store/modalStroe";
-import { Header } from "@/app/header/header";
 
 export function Home() {
   const nav = useNavigate();
@@ -43,7 +42,6 @@ export function Home() {
 
   return (
     <>
-      <Header />
       <s.Main>
         <BackButton>성장 일기</BackButton>
         <s.PlusBtn
@@ -82,6 +80,12 @@ export function Home() {
               </s.ThumbnailBox>
             </s.DiariesByDate>
           ))}
+          {dieries.length == 0 && (
+            <s.EmptyDiary>
+              <GetIcon name="Pets" width={150} height={150} />
+              <p>반려동물의 성장을 기록해보세요</p>
+            </s.EmptyDiary>
+          )}
         </s.Diarysection>
       </s.Main>
     </>

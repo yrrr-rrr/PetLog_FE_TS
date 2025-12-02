@@ -9,7 +9,6 @@ import { BackButton } from "@/shared/backBtn/BackButton";
 import { useEffect } from "react";
 import { login } from "@/features/tempLogin/login";
 import { useLogin } from "@/features/tempLogin/loginStore";
-import { Header } from "@/app/header/header";
 
 export function MakeGroup() {
   const { step, setStep } = useForm();
@@ -22,7 +21,6 @@ export function MakeGroup() {
   }, [setLogin]);
   return (
     <>
-      <Header />
       <s.Main>
         <s.PageTitleSection>
           <BackButton

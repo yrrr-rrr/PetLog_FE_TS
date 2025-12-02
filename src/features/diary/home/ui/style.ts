@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Main = styled.main`
-  margin-top: 60px;
   padding-bottom: 40px;
   width: 100%;
   display: flex;
@@ -102,4 +101,18 @@ export const PlusBtn = styled.div`
   background-color: ${({ theme }) => theme.color.yellow};
   z-index: 3;
   cursor: pointer;
+`;
+
+export const EmptyDiary = styled.div`
+  margin-top: 50%;
+  gap: 20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: ${({ theme }) => theme.color.gray_4};
+  font-size: ${({ theme }) => theme.font.heading_L};
+  font-weight: ${({ theme }) => theme.font.weightSemiBold};
 `;

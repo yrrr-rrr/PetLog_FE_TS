@@ -10,7 +10,7 @@ import { useModal } from "@/shared/baseModal/store/modalStroe";
 import { BaseModal } from "@/shared/baseModal/ui/baseModal";
 import { useDiary } from "../../home/store/diaryStore";
 import { deleteDiary } from "../lib/deleteDiary";
-import { Header } from "@/app/header/header";
+
 export function DiaryDetail() {
   const { diaryDetail, setDiaryDetail } = useDiaryDetail();
   const { groupId, diaryId } = useDiary();
@@ -28,7 +28,6 @@ export function DiaryDetail() {
 
   return (
     <>
-      <Header />
       <s.Main>
         <BackButton
           onClick={() => {

@@ -14,7 +14,6 @@ import { getExistImgs, getNewImgs } from "../../lib/getImgs";
 import { useDiary } from "@/features/diary/home/store/diaryStore";
 import { formatYYYYMMDD } from "@/shared/formatYYYYMMDD/formatYYYYMMDD";
 import { handleInput } from "../../lib/handleInput";
-import { Header } from "@/app/header/header";
 
 export function AddContent() {
   const { imgs } = useAddImgs();
@@ -38,7 +37,6 @@ export function AddContent() {
 
   return (
     <>
-      <Header />
       <s.Main>
         <BackButton
           onClick={() => {

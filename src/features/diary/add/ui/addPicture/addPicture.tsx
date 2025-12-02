@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import * as s from "./style";
 import { useDiaryDetail } from "@/features/diary/detail/store/diaryDetailstore";
 import { ImgEditor } from "@/shared/imgEditor/ui/imgEditor";
-import { Header } from "@/app/header/header";
 
 export function AddPicture() {
   const { diaryDetail } = useDiaryDetail();
@@ -12,7 +11,6 @@ export function AddPicture() {
   const param = useLocation().pathname.split("/")[1];
   return (
     <>
-      <Header />
       <s.Main>
         <BackButton
           onClick={() => {

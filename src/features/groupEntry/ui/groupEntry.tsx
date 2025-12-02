@@ -2,13 +2,11 @@ import { GetIcon } from "@/shared/getIcon/getIcon";
 import type * as icons from "@/shared/getIcon/icons";
 import * as s from "./style";
 import { useNavigate, type NavigateFunction } from "react-router-dom";
-import { Header } from "@/app/header/header";
 
 export function GroupEtry() {
   const nav = useNavigate();
   return (
     <>
-      <Header />
       <s.Main>
         <s.Title>반려 기록 시작하기</s.Title>
         <s.ChoiceSection>

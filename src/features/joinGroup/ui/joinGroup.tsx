@@ -6,7 +6,6 @@ import * as s from "./style";
 import { BackButton } from "@/shared/backBtn/BackButton";
 import { useNavigate } from "react-router-dom";
 import { joinGroup } from "../lib/joinGroup";
-import { Header } from "@/app/header/header";
 
 export function JoinGroup() {
   const { openModal, isOpen } = useWarningModal();
@@ -17,7 +16,6 @@ export function JoinGroup() {
 
   return (
     <>
-      <Header />
       <s.Main>
         <BackButton
           onClick={() => {
