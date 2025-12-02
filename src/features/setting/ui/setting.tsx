@@ -9,8 +9,8 @@ import { BackButton } from "@/shared/backBtn/BackButton";
 import * as s from "./style";
 import { getNotification } from "../lib/getNotification";
 import { getGroupId } from "@/shared/getGroupid/getGroupId";
-import { useModal } from "@/shared/baseModal/store/modalStroe";
 import { BaseModal } from "@/shared/baseModal/ui/baseModal";
+import { useModal } from "@/shared/baseModal/store/modalStroe";
 
 type ModalKeyType = "deleteAccount" | "logout" | "leaveGroup";
 
@@ -52,63 +52,61 @@ export function Setting() {
   }, [acc]);
 
   return (
-    <>
-      <s.Main>
-        <BackButton
-          onClick={() => {
-            nav(-1);
-          }}
-        >
-          설정
-        </BackButton>
-        <s.Ul>
-          <s.Li>
-            <p>알림 수신 여부</p>
-            <s.Toggle
-              $toggle={toggle}
-              onClick={() => {
-                if (!acc) {
-                  return;
-                }
-                setNotification(!toggle, openModal, acc);
-                setToggle((prev) => !prev);
-              }}
-            >
-              <div></div>
-            </s.Toggle>
-          </s.Li>
-          <s.Li
+    <s.Main>
+      <BackButton
+        onClick={() => {
+          nav(-1);
+        }}
+      >
+        설정
+      </BackButton>
+      <s.Ul>
+        <s.Li>
+          <p>알림 수신 여부</p>
+          <s.Toggle
+            $toggle={toggle}
             onClick={() => {
               if (!acc) {
                 return;
               }
-              leaveGroup(openModal, acc, groupId, nav);
+              setNotification(!toggle, openModal, acc);
+              setToggle((prev) => !prev);
             }}
           >
-            그룹 나가기
-          </s.Li>
-          <s.Li
-            onClick={() => {
-              if (!acc) {
-                return;
-              }
-              logout(nav);
-            }}
-          >
-            로그 아웃
-          </s.Li>
-        </s.Ul>
-        <s.WithdrawBox
+            <s.ToggleBtn></s.ToggleBtn>
+          </s.Toggle>
+        </s.Li>
+        <s.Li
           onClick={() => {
-            if (!acc) {
-              return;
-            }
-            deleteAccount();
+            setModalKey("leaveGroup");
+            setIsOpen();
           }}
         >
-          탈퇴 하기
-        </s.WithdrawBox>
-      </s.Main>
-    </>
+          그룹 나가기
+        </s.Li>
+        <s.Li
+          onClick={() => {
+            setModalKey("logout");
+            setIsOpen();
+          }}
+        >
+          로그 아웃
+        </s.Li>
+      </s.Ul>
+      <s.WithdrawBox
+        onClick={() => {
+          setModalKey("deleteAccount");
+          setIsOpen();
+        }}
+      >
+        탈퇴 하기
+      </s.WithdrawBox>
+      {isOpen && (
+        <BaseModal
+          message={modalMessage[modalKey].message}
+          onClick={modalMessage[modalKey].action}
+        />
+      )}
+    </s.Main>
   );
 }

@@ -17,7 +17,7 @@ export async function deleteDiary(
         },
       },
     );
-    console.log(response.ok);
+
     if (response.ok) {
       nav("/diary");
     }

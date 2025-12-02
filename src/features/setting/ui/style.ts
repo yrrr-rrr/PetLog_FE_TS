@@ -41,15 +41,15 @@ export const Toggle = styled.div<{ $toggle: boolean }>`
   justify-content: ${({ $toggle }) => ($toggle ? "end" : "start")};
   background-color: ${({ theme, $toggle }) =>
     $toggle ? theme.color.yellow : theme.color.gray_3};
+`;
 
-  div {
-    width: 20px;
-    height: 20px;
-    border: 1px solid ${({ theme }) => theme.color.black};
-    border-radius: 20px;
-    background-color: ${({ theme }) => theme.color.white};
-    cursor: pointer;
-  }
+export const ToggleBtn = styled.div`
+  width: 20px;
+  height: 20px;
+  border: 1px solid ${({ theme }) => theme.color.black};
+  border-radius: 20px;
+  background-color: ${({ theme }) => theme.color.white};
+  cursor: pointer;
 `;
 
 export const WithdrawBox = styled.p`

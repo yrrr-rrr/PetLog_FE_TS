@@ -15,7 +15,6 @@ export async function login(setLogin: (acc: string, ref: string) => void) {
       console.log("err");
     }
     const data = await res.json();
-    // console.log(data.data.accessToken);
     setLogin(data.data.accessToken, data.data.refreshToken);
     localStorage.setItem("acc", data.data.accessToken);
   } catch (e) {

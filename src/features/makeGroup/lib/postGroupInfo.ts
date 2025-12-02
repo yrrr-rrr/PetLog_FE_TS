@@ -9,7 +9,6 @@ export async function postGroupInfo(
   openModal: (warningMessage: string) => void,
 ) {
   try {
-    // console.log(petInfo, url, careInfo);
     const response = await fetch("https://dev.petlog.site/api/groups", {
       method: "POST",
       headers: {
