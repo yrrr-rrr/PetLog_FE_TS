@@ -1,3 +1,7 @@
+import {
+  requestTokenRefresh,
+  sendToNative,
+} from "@/features/nativeBootstrap/lib/nativeBridge";
 import type { NavigateFunction } from "react-router-dom";
 
 export async function addDiary(
@@ -13,7 +17,7 @@ export async function addDiary(
   nav: NavigateFunction,
 ) {
   try {
-    const response = await fetch(
+    let response = await fetch(
       `https://dev.petlog.site/api/groups/${groupId}/diary${type == "edit" ? `/${diaryId}` : ""}`,
       {
         method: type == "add" ? "POST" : "PATCH",
@@ -29,6 +33,28 @@ export async function addDiary(
         }),
       },
     );
+
+    if (response.status === 401) {
+      const newToken = await requestTokenRefresh();
+
+      response = await fetch(
+        `https://dev.petlog.site/api/groups/${groupId}/diary${type == "edit" ? `/${diaryId}` : ""}`,
+        {
+          method: type == "add" ? "POST" : "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${newToken}`,
+          },
+          body: JSON.stringify({
+            title: title,
+            content: content,
+            images: imgs == null ? null : imgs,
+            writtenAt: date,
+          }),
+        },
+      );
+    }
+
     if (!response.ok) {
       openModal("전송 오류가 발생했습니다");
     } else {

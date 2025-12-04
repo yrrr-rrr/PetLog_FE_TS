@@ -1,3 +1,4 @@
+import { requestTokenRefresh } from "@/features/nativeBootstrap/lib/nativeBridge";
 import type React from "react";
 
 export async function getNotification(
@@ -6,13 +7,26 @@ export async function getNotification(
   acc: string,
 ) {
   try {
-    const response = await fetch("https://dev.petlog.site/api/notification", {
+    let response = await fetch("https://dev.petlog.site/api/notification", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${acc}`,
       },
     });
+
+    if (response.status === 401) {
+      const newToken = await requestTokenRefresh();
+
+      response = await fetch("https://dev.petlog.site/api/notification", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${newToken}`,
+        },
+      });
+    }
+
     if (!response.ok) {
       openModal("전송 오류가 발생했습니다");
     }
