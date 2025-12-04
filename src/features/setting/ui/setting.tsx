@@ -3,7 +3,7 @@ import { useWarningModal } from "@/shared/warningModal/store/warningModalStore";
 import { useEffect, useState } from "react";
 import { deleteAccount } from "../lib/deleteAccount";
 import { leaveGroup } from "../lib/leaveGroup";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../lib/logout";
 import { BackButton } from "@/shared/backBtn/BackButton";
 import * as s from "./style";
@@ -20,7 +20,8 @@ export function Setting() {
   const { isOpen, setIsOpen } = useModal();
   const [toggle, setToggle] = useState(false);
   const nav = useNavigate();
-  const { accessToken } = useNative();
+  const { accessToken, nativeRoute } = useNative();
+  const currentPath = useLocation().pathname;
 
   const [groupId, setGroupId] = useState(0);
   const [modalKey, setModalKey] = useState<ModalKeyType>("deleteAccount");
@@ -56,13 +57,7 @@ export function Setting() {
 
   return (
     <s.Main>
-      <BackButton
-        onClick={() => {
-          nav(-1);
-        }}
-      >
-        설정
-      </BackButton>
+      <BackButton>설정</BackButton>
       <s.Ul>
         <s.Li>
           <p>알림 수신 여부</p>

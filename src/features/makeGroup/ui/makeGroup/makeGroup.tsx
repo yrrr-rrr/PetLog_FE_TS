@@ -1,24 +1,27 @@
 import { useForm } from "../../store/formStore";
 import { CareInfoForm } from "../careInfo/careInfoForm";
 import { PetInfoForm } from "../petInfo/petInfoForm";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import * as s from "./style";
 import { useWarningModal } from "@/shared/warningModal/store/warningModalStore";
 import { WarningModal } from "@/shared/warningModal/ui/warningModal";
 import { BackButton } from "@/shared/backBtn/BackButton";
+import { useNative } from "@/features/nativeBootstrap/store/wkwebviewStore";
+import { sendToNative } from "@/features/nativeBootstrap/lib/nativeBridge";
 
 export function MakeGroup() {
   const { step, setStep } = useForm();
   const { isOpen } = useWarningModal();
+  const { nativeRoute } = useNative();
   const pageInfoText = ["반려동물 기본 정보", "케어 정보"];
   const nav = useNavigate();
+  const currentPath = useLocation().pathname;
 
   return (
     <s.Main>
       <s.PageTitleSection>
         <BackButton
-          onClick={() => {
-            nav(-1);
+          func={() => {
             if (step === 2) {
               setStep("prev");
             }

@@ -40,13 +40,7 @@ export function AddContent() {
 
   return (
     <s.Main>
-      <BackButton
-        onClick={() => {
-          nav(-1);
-        }}
-      >
-        {""}
-      </BackButton>
+      <BackButton>{""}</BackButton>
       <s.ContentSection>
         {imgs.length !== 0 && <Carousel imgs={previewImgs} width={200} />}
         <s.TitleBox>

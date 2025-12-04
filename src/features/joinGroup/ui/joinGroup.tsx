@@ -4,7 +4,6 @@ import { useWarningModal } from "@/shared/warningModal/store/warningModalStore";
 import { WarningModal } from "@/shared/warningModal/ui/warningModal";
 import * as s from "./style";
 import { BackButton } from "@/shared/backBtn/BackButton";
-import { useNavigate } from "react-router-dom";
 import { joinGroup } from "../lib/joinGroup";
 import { useNative } from "@/features/nativeBootstrap/store/wkwebviewStore";
 
@@ -12,18 +11,11 @@ export function JoinGroup() {
   const { openModal, isOpen } = useWarningModal();
   const [isReject, setIsReject] = useState(false);
   const [code, setCode] = useState("");
-  const nav = useNavigate();
   const { accessToken } = useNative();
 
   return (
     <s.Main>
-      <BackButton
-        onClick={() => {
-          nav("-1");
-        }}
-      >
-        뒤로 가기
-      </BackButton>
+      <BackButton>뒤로 가기</BackButton>
       {isOpen && <WarningModal />}
       <s.CodeSection>
         <s.Title>그룹원에게 받은 초대 코드를 입력해 주세요</s.Title>

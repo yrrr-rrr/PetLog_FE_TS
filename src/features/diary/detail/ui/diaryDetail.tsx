@@ -29,13 +29,7 @@ export function DiaryDetail() {
 
   return (
     <s.Main>
-      <BackButton
-        onClick={() => {
-          nav(-1);
-        }}
-      >
-        {diaryDate}
-      </BackButton>
+      <BackButton>{diaryDate}</BackButton>
       <s.DiarySection>
         {diaryDetail.images.length !== 0 && (
           <Carousel imgs={diaryDetail.images} width={400} />
