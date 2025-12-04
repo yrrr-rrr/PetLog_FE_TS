@@ -1,10 +1,8 @@
 import { setNotification } from "../lib/setNotification";
 import { useWarningModal } from "@/shared/warningModal/store/warningModalStore";
 import { useEffect, useState } from "react";
-import { deleteAccount } from "../lib/deleteAccount";
 import { leaveGroup } from "../lib/leaveGroup";
-import { useLocation, useNavigate } from "react-router-dom";
-import { logout } from "../lib/logout";
+import { useNavigate } from "react-router-dom";
 import { BackButton } from "@/shared/backBtn/BackButton";
 import * as s from "./style";
 import { getNotification } from "../lib/getNotification";
@@ -12,6 +10,7 @@ import { getGroupId } from "@/shared/getGroupid/getGroupId";
 import { BaseModal } from "@/shared/baseModal/ui/baseModal";
 import { useModal } from "@/shared/baseModal/store/modalStroe";
 import { useNative } from "@/features/nativeBootstrap/store/wkwebviewStore";
+import { sendToNative } from "@/features/nativeBootstrap/lib/nativeBridge";
 
 type ModalKeyType = "deleteAccount" | "logout" | "leaveGroup";
 
@@ -20,19 +19,18 @@ export function Setting() {
   const { isOpen, setIsOpen } = useModal();
   const [toggle, setToggle] = useState(false);
   const nav = useNavigate();
-  const { accessToken, nativeRoute } = useNative();
-  const currentPath = useLocation().pathname;
+  const { accessToken } = useNative();
 
   const [groupId, setGroupId] = useState(0);
   const [modalKey, setModalKey] = useState<ModalKeyType>("deleteAccount");
   const modalMessage = {
     deleteAccount: {
       message: "회원을 탈퇴 하시겠습니까?",
-      action: () => deleteAccount(),
+      action: () => sendToNative("DELETE_ACCOOUNT"),
     },
     logout: {
       message: "로그아웃 하시겠습니까?",
-      action: () => logout(nav),
+      action: () => sendToNative("LOGOUT"),
     },
     leaveGroup: {
       message: "그룹을 나가시겠습니까?",
