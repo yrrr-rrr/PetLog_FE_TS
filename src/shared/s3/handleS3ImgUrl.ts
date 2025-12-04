@@ -13,11 +13,11 @@ export async function handleS3ImgUrl(
   }
   if (Array.isArray(imgs)) {
     imgs.forEach((x, idx) => {
-      const name = makeFileName("profile", x, idx);
+      const name = makeFileName(x, idx);
       imgNames.push(name);
     });
   } else {
-    const name = makeFileName("profile", imgs, 0);
+    const name = makeFileName(imgs, 0);
     imgNames.push(name);
   }
 
