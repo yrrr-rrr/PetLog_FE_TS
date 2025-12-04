@@ -1,4 +1,4 @@
-import type { ImgType } from "@/features/diary/add/store/addStore";
+import type { ImgType } from "@/processes/diary/store/addStore";
 
 export function initEditImgs(
   existingUrls: string[],

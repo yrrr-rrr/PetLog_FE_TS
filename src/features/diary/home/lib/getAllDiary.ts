@@ -1,5 +1,5 @@
 import { requestTokenRefresh } from "@/features/nativeBootstrap/lib/nativeBridge";
-import type { DiaryType } from "../store/diaryStore";
+import type { DiaryType } from "@/processes/diary/store/diaryStore";
 
 export async function getAllDiary(
   setAllDiary: (arr: DiaryType[]) => void,

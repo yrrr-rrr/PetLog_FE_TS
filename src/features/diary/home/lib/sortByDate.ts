@@ -1,4 +1,4 @@
-import type { DiaryType } from "../store/diaryStore";
+import type { DiaryType } from "@/processes/diary/store/diaryStore";
 
 export function sortByDate(arr: DiaryType[]) {
   if (arr.length < 1) {

@@ -1,4 +1,4 @@
-import type { ImgType } from "@/features/diary/add/store/addStore";
+import type { ImgType } from "@/processes/diary/store/addStore";
 import type React from "react";
 
 export function handleAddFile(

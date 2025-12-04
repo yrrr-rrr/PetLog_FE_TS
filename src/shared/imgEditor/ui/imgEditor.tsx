@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import * as s from "./style";
 
-import { useAddImgs } from "@/features/diary/add/store/imgStore";
+import { useAddImgs } from "@/processes/diary/store/imgStore";
 import { handleAddFile } from "../lib/handleAddFile";
 import { initEditImgs } from "../lib/initEditImgs";
 import { GetIcon } from "@/shared/getIcon/getIcon";

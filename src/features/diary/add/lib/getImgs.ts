@@ -1,4 +1,4 @@
-import type { ImgType } from "../store/addStore";
+import type { ImgType } from "@/processes/diary/store/addStore";
 
 export function getNewImgs(imgs: ImgType[]) {
   const newImg = imgs

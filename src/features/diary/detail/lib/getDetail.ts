@@ -1,5 +1,5 @@
 import { requestTokenRefresh } from "@/features/nativeBootstrap/lib/nativeBridge";
-import type { DiaryDetailType } from "./../store/diaryDetailstore";
+import type { DiaryDetailType } from "@/processes/diary/store/diaryDetailstore";
 export async function getDetail(
   groupId: number,
   diaryId: number,
