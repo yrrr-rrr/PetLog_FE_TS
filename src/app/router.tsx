@@ -1,13 +1,13 @@
-import { AddContent } from "@/features/diary/add/ui/addContent/addContent";
-import { AddPicture } from "@/features/diary/add/ui/addPicture/addPicture";
-import { DiaryDetail } from "@/features/diary/detail/ui/diaryDetail";
-import { Home } from "@/features/diary/home/ui/home";
-import { GroupEtry } from "@/features/groupEntry/ui/groupEntry";
-import { JoinGroup } from "@/features/joinGroup/ui/joinGroup";
-import { MakeGroup } from "@/features/makeGroup/ui/makeGroup/makeGroup";
-import { Setting } from "@/features/setting/ui/setting";
+import { GroupEtry } from "@/pages/grouEentry/groupEntry";
+import { JoinGroup } from "@/pages/joinGroup/joinGroup";
 import { createBrowserRouter } from "react-router-dom";
 import { RootEntry } from "./rootEntry";
+import { MakeGroup } from "@/pages/makeGroup/makeGroup/makeGroup";
+import { Setting } from "@/pages/setting/setting";
+import { Home } from "@/pages/diaryHome/home";
+import { AddPicture } from "@/pages/diaryAdd/addPicture/addPicture";
+import { DiaryDetail } from "@/pages/diaryDetail/diaryDetail";
+import { AddContent } from "@/pages/diaryAdd/addContent/addContent";
 
 export const router = createBrowserRouter([
   {
