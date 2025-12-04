@@ -1,3 +1,4 @@
+import { requestTokenRefresh } from "@/features/nativeBootstrap/lib/nativeBridge";
 import type { DiaryDetailType } from "./../store/diaryDetailstore";
 export async function getDetail(
   groupId: number,
@@ -6,7 +7,7 @@ export async function getDetail(
   acc: string,
 ) {
   try {
-    const response = await fetch(
+    let response = await fetch(
       `https://dev.petlog.site/api/groups/${groupId}/diary/${diaryId}`,
       {
         method: "GET",
@@ -16,6 +17,22 @@ export async function getDetail(
         },
       },
     );
+
+    if (response.status === 401) {
+      const newToken = await requestTokenRefresh();
+
+      response = await fetch(
+        `https://dev.petlog.site/api/groups/${groupId}/diary/${diaryId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${newToken}`,
+          },
+        },
+      );
+    }
+
     const data = await response.json();
     setDiaryDetail(data.data);
   } catch (e) {

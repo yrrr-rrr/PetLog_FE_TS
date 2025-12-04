@@ -9,6 +9,7 @@ export const Background = styled.div`
   align-items: center;
   position: absolute;
   top: 0;
+  z-index: 1;
 `;
 
 export const Modal = styled.div`

@@ -11,13 +11,7 @@ export function AddPicture() {
   const param = useLocation().pathname.split("/")[1];
   return (
     <s.Main>
-      <BackButton
-        onClick={() => {
-          nav("/diary");
-        }}
-      >
-        {""}
-      </BackButton>
+      <BackButton>{""}</BackButton>
       <s.AddSection>
         <s.HelperText>성장 일기에 사용할 사진을 추가해 주세요</s.HelperText>
         <s.ImgDiv>

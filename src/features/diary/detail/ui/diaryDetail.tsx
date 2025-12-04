@@ -10,6 +10,7 @@ import { useModal } from "@/shared/baseModal/store/modalStroe";
 import { BaseModal } from "@/shared/baseModal/ui/baseModal";
 import { useDiary } from "../../home/store/diaryStore";
 import { deleteDiary } from "../lib/deleteDiary";
+import { useNative } from "@/features/nativeBootstrap/store/wkwebviewStore";
 
 export function DiaryDetail() {
   const { diaryDetail, setDiaryDetail } = useDiaryDetail();
@@ -17,24 +18,18 @@ export function DiaryDetail() {
   const { isOpen, setIsOpen } = useModal();
   const diaryDate = dateToString(diaryDetail.writtenAt);
   const nav = useNavigate();
-  const acc = localStorage.getItem("acc");
+  const { accessToken } = useNative();
 
   useEffect(() => {
-    if (!acc) {
+    if (!accessToken) {
       return;
     }
-    getDetail(groupId, Number(diaryId), setDiaryDetail, acc);
-  }, [acc, diaryId, groupId, setDiaryDetail]);
+    getDetail(groupId, Number(diaryId), setDiaryDetail, accessToken);
+  }, [accessToken, diaryId, groupId, setDiaryDetail]);
 
   return (
     <s.Main>
-      <BackButton
-        onClick={() => {
-          nav(-1);
-        }}
-      >
-        {diaryDate}
-      </BackButton>
+      <BackButton>{diaryDate}</BackButton>
       <s.DiarySection>
         {diaryDetail.images.length !== 0 && (
           <Carousel imgs={diaryDetail.images} width={400} />
@@ -67,10 +62,10 @@ export function DiaryDetail() {
         <BaseModal
           message='"현재 일기를 삭제 하시겠습니까?"'
           onClick={() => {
-            if (!acc) {
+            if (!accessToken) {
               return;
             }
-            deleteDiary(groupId, Number(diaryId), acc, nav);
+            deleteDiary(groupId, Number(diaryId), accessToken, nav);
           }}
         />
       )}

@@ -5,7 +5,7 @@ import { Button } from "@/shared/button/button";
 import * as s from "./style";
 import { useLocation, useNavigate } from "react-router-dom";
 import { dateToString } from "@/shared/DateToString/dateToString";
-import { useWarningModal } from "@/shared/warmingModal/store/warningModalStore";
+import { useWarningModal } from "@/shared/warningModal/store/warningModalStore";
 import { addDiary } from "../../lib/addDiary";
 import { useAddImgs } from "../../store/imgStore";
 import { useDiaryDetail } from "@/features/diary/detail/store/diaryDetailstore";
@@ -14,12 +14,15 @@ import { getExistImgs, getNewImgs } from "../../lib/getImgs";
 import { useDiary } from "@/features/diary/home/store/diaryStore";
 import { formatYYYYMMDD } from "@/shared/formatYYYYMMDD/formatYYYYMMDD";
 import { handleInput } from "../../lib/handleInput";
+import { useNative } from "@/features/nativeBootstrap/store/wkwebviewStore";
+import { requestTokenRefresh } from "@/features/nativeBootstrap/lib/nativeBridge";
 
 export function AddContent() {
   const { imgs } = useAddImgs();
   const { diaryDetail } = useDiaryDetail();
   const { groupId, diaryId } = useDiary();
   const { openModal } = useWarningModal();
+  const { accessToken } = useNative();
   const calendarRef = useRef<HTMLInputElement | null>(null);
   const nav = useNavigate();
   const param = useLocation().pathname.split("/")[1];
@@ -35,17 +38,12 @@ export function AddContent() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const previewImgs = imgs.filter((x) => !x.isDeleted).map((x) => x.previewUrl);
-  const acc = localStorage.getItem("acc");
+
+  requestTokenRefresh();
 
   return (
     <s.Main>
-      <BackButton
-        onClick={() => {
-          nav(-1);
-        }}
-      >
-        {""}
-      </BackButton>
+      <BackButton>{""}</BackButton>
       <s.ContentSection>
         {imgs.length !== 0 && <Carousel imgs={previewImgs} width={200} />}
         <s.TitleBox>
@@ -101,12 +99,16 @@ export function AddContent() {
         <s.BtnBox>
           <Button
             onClick={async () => {
-              if (!acc) {
+              if (!accessToken) {
                 return;
               }
               const newImgArr = getNewImgs(imgs);
               const existImgArr = getExistImgs(imgs);
-              const url = await handleS3ImgUrl(newImgArr, acc, "DIARY_IMAGE");
+              const url = await handleS3ImgUrl(
+                newImgArr,
+                accessToken,
+                "DIARY_IMAGE",
+              );
               const finalImgArr = existImgArr.concat(url);
               addDiary(
                 param == "editdiary" ? "edit" : "add",
@@ -115,7 +117,7 @@ export function AddContent() {
                 finalImgArr ? finalImgArr : null,
                 formatYYYYMMDD(date),
                 openModal,
-                acc,
+                accessToken,
                 groupId,
                 diaryId,
                 nav,

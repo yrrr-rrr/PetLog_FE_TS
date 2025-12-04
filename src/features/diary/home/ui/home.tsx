@@ -2,16 +2,15 @@ import { BackButton } from "@/shared/backBtn/BackButton";
 import { useDiary } from "../store/diaryStore";
 import { useEffect } from "react";
 import { getAllDiary } from "../lib/getAllDiary";
-import { useWarningModal } from "@/shared/warmingModal/store/warningModalStore";
+import { useWarningModal } from "@/shared/warningModal/store/warningModalStore";
 import { sortByDate } from "../lib/sortByDate";
 import * as s from "./style";
 import { GetIcon } from "@/shared/getIcon/getIcon";
 import { useNavigate } from "react-router-dom";
 import { useAddImgs } from "../../add/store/imgStore";
 import { getGroupId } from "@/shared/getGroupid/getGroupId";
-// import { useLogin } from "@/features/tempLogin/loginStore";
-// import { login } from "@/features/tempLogin/login";
 import { useModal } from "@/shared/baseModal/store/modalStroe";
+import { useNative } from "@/features/nativeBootstrap/store/wkwebviewStore";
 
 export function Home() {
   const nav = useNavigate();
@@ -19,20 +18,19 @@ export function Home() {
   const { setInitStore } = useAddImgs();
   const { allDiary, setAllDiary, setGroupId, setDiaryId } = useDiary();
   const { openModal } = useWarningModal();
-  const acc2 = localStorage.getItem("acc");
-  // const { ref, acc, setLogin } = useLogin(); // 왜 스토어에 acc 없지..
+  const { accessToken } = useNative();
 
   useEffect(() => {
-    if (!acc2) {
+    if (!accessToken) {
       return;
     }
     const getData = async () => {
-      const id = await getGroupId(setGroupId, acc2);
-      await getAllDiary(setAllDiary, openModal, id, acc2);
+      const id = await getGroupId(setGroupId, accessToken);
+      await getAllDiary(setAllDiary, openModal, id, accessToken);
     };
     getData();
     setClose();
-  }, [acc2, openModal, setAllDiary, setClose, setGroupId]);
+  }, [accessToken, openModal, setAllDiary, setClose, setGroupId]);
 
   useEffect(() => {
     setInitStore();
