@@ -1,4 +1,4 @@
-import * as s from "@/features/makeGroup/ui/careInfo/style";
+import * as s from "@/pages/makeGroup/careInfo/style";
 import type React from "react";
 import {
   handleForm,
@@ -6,9 +6,10 @@ import {
 } from "@/features/makeGroup/lib/handleForm";
 import type { CareFormType } from "@/features/makeGroup/type";
 
-export function CycleInput(props: Props) {
+export function LastCareTime(props: Props) {
   const { label, type, setForm, setDisabled, disabled } = props;
-  const key = type as keyof CareFormType;
+  const hour = `${type}Hour` as keyof CareFormType;
+  const minute = `${type}Minute` as keyof CareFormType;
   return (
     <s.InputBox>
       <s.InputInfoBox>
@@ -17,22 +18,31 @@ export function CycleInput(props: Props) {
           <span>*</span>
         </s.Label>
         <s.Description>
-          시간은 24시간 기준으로 작성해 주세요 (ex 5시 → 17시)
+          시간은 24시간 기준으로 작성해 주세요 (ex 17:30)
         </s.Description>
       </s.InputInfoBox>
       <s.TimeBox>
         <s.Input
-          type="text"
           maxLength={2}
+          type="text"
           onChange={(e) => {
             const value = Number(e.target.value);
-            handleForm(key, value, setForm);
-            handleOnChange(key, value, setDisabled);
+            handleForm(hour, value, setForm);
+            handleOnChange(hour, value, setDisabled);
           }}
         />
-        <span>시간</span>
+        <span>:</span>
+        <s.Input
+          maxLength={2}
+          type="text"
+          onChange={(e) => {
+            const value = Number(e.target.value);
+            handleForm(minute, value, setForm);
+            handleOnChange(minute, value, setDisabled);
+          }}
+        />
       </s.TimeBox>
-      {disabled[key] && (
+      {(disabled[hour] || disabled[minute]) && (
         <s.WarningMassage>
           해당 항목은 비워두거나 한글을 입력할 수 없습니다
         </s.WarningMassage>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { GetIcon } from "@/shared/getIcon/getIcon";
 import { genderHandle } from "@/features/makeGroup/lib/genderHandle";
 import type { PetInfo } from "@/features/makeGroup/type";
-import * as s from "@/features/makeGroup/ui/petInfo/style";
+import * as s from "@/pages/makeGroup/petInfo/style";
 
 export function Gender({
   setForm,

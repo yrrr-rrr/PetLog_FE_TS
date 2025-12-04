@@ -1,11 +1,11 @@
 import { useMemo, useState } from "react";
 import { Button } from "@/shared/button/button";
-import { useForm } from "../../store/formStore";
-import type { PetInfo } from "../../type";
 import { Gender } from "./container/Gender";
 import { InputSection } from "./container/InputSection";
 import { Profile } from "./container/Profile";
 import * as s from "./style";
+import type { PetInfo } from "@/features/makeGroup/type";
+import { useForm } from "@/processes/groupEntry/store/formStore";
 
 export function PetInfoForm() {
   const { setInfo, setStep } = useForm();

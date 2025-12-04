@@ -1,14 +1,14 @@
 import { useMemo, useState } from "react";
-import { useForm } from "../../store/formStore";
 import * as s from "./style";
 import { Button } from "@/shared/button/button";
 import { CycleInput } from "./container/cycleInput";
 import { LastCareTime } from "./container/lastCareTime";
-import type { CareFormType } from "../../type";
-import { postGroupInfo } from "../../lib/postGroupInfo";
 import { handleS3ImgUrl } from "@/shared/s3/handleS3ImgUrl";
 import { useNative } from "@/features/nativeBootstrap/store/wkwebviewStore";
 import { sendToNative } from "@/features/nativeBootstrap/lib/nativeBridge";
+import { useForm } from "@/processes/groupEntry/store/formStore";
+import type { CareFormType } from "@/features/makeGroup/type";
+import { postGroupInfo } from "@/features/makeGroup/lib/postGroupInfo";
 
 export function CareInfoForm() {
   const { petInfo } = useForm();

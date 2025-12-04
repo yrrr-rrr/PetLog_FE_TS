@@ -4,7 +4,7 @@ import {
   handleOnChange,
 } from "@/features/makeGroup/lib/handleForm";
 import type { PetInfo } from "@/features/makeGroup/type";
-import * as s from "@/features/makeGroup/ui/petInfo/style";
+import * as s from "@/pages/makeGroup/petInfo/style";
 
 export function InputSection({
   setForm,
