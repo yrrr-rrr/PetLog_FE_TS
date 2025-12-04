@@ -7,10 +7,15 @@ import { JoinGroup } from "@/features/joinGroup/ui/joinGroup";
 import { MakeGroup } from "@/features/makeGroup/ui/makeGroup/makeGroup";
 import { Setting } from "@/features/setting/ui/setting";
 import { createBrowserRouter } from "react-router-dom";
+import { RootEntry } from "./rootEntry";
 
 export const router = createBrowserRouter([
   {
-    path: "/groupentry",
+    path: "/",
+    element: <RootEntry />,
+  },
+  {
+    path: "/start",
     element: <GroupEtry />,
   },
   {
