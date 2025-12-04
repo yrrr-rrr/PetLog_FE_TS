@@ -15,6 +15,7 @@ import { useDiary } from "@/features/diary/home/store/diaryStore";
 import { formatYYYYMMDD } from "@/shared/formatYYYYMMDD/formatYYYYMMDD";
 import { handleInput } from "../../lib/handleInput";
 import { useNative } from "@/features/nativeBootstrap/store/wkwebviewStore";
+import { requestTokenRefresh } from "@/features/nativeBootstrap/lib/nativeBridge";
 
 export function AddContent() {
   const { imgs } = useAddImgs();
@@ -37,6 +38,8 @@ export function AddContent() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const previewImgs = imgs.filter((x) => !x.isDeleted).map((x) => x.previewUrl);
+
+  requestTokenRefresh();
 
   return (
     <s.Main>
