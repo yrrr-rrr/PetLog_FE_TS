@@ -16,7 +16,7 @@ export function Home() {
   const { setClose } = useModal();
   const { setInitStore } = useAddImgs();
   const { allDiary, setAllDiary, setGroupId, setDiaryId } = useDiary();
-  const { accessToken } = useNative();
+  const { accessToken, nativeRoute } = useNative();
 
   useEffect(() => {
     if (!accessToken) {
@@ -81,6 +81,7 @@ export function Home() {
             <p>반려동물의 성장을 기록해보세요</p>
           </s.EmptyDiary>
         )}
+        <p>{nativeRoute}</p>
       </s.Diarysection>
     </s.Main>
   );
