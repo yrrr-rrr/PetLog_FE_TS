@@ -12,15 +12,16 @@ export const Background = styled.div`
 `;
 
 export const Modal = styled.div`
-  padding: 9vh 5vw 5vw 5vw;
-  gap: 12vw;
-  width: 80vw;
-  height: 24vh;
+  padding: 5vw;
+  gap: 8vw;
+  width: 320px;
+  height: 210px;
   border: 1px solid ${({ theme }) => theme.color.black};
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: end;
   background: var(--white, #fdfdfb);
   box-shadow: 0 0 15px 0 ${({ theme }) => theme.color.black_dimmed};
 

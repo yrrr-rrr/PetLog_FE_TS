@@ -53,16 +53,18 @@ export function PetInfoForm() {
         />
         <Gender setForm={setForm} />
       </s.InputSection>
-      <Button
-        disabled={!(isWarning && isFilled)}
-        onClick={(e) => {
-          e.preventDefault();
-          setInfo(form);
-          setStep("next");
-        }}
-      >
-        다음
-      </Button>
+      <div>
+        <Button
+          disabled={!(isWarning && isFilled)}
+          onClick={(e) => {
+            e.preventDefault();
+            setInfo(form);
+            setStep("next");
+          }}
+        >
+          다음
+        </Button>
+      </div>
     </s.Form>
   );
 }

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Btn = styled.button<{ $disabled: boolean; $color: string }>`
-  width: 25vw;
-  height: 4vh;
+  width: 100px;
+  height: 40px;
   border: 1px solid
     ${({ theme, $disabled }) =>
       $disabled ? theme.color.gray_4 : theme.color.black};

@@ -44,14 +44,15 @@ export const Profile = styled.img`
 export const WritingSection = styled.section`
   gap: 3vw;
   width: 100%;
+  min-height: 216px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
 `;
 export const InputBox = styled.div`
   gap: 2vw;
   width: 85vw;
-  height: 9vh;
   display: flex;
   flex-direction: column;
 `;

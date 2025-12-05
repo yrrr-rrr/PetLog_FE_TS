@@ -92,22 +92,24 @@ export function CareInfoForm() {
           }}
         ></s.Note>
       </s.InputSection>
-      <Button
-        disabled={!(isFilled && isWarning)}
-        onClick={async (e) => {
-          e.preventDefault();
-          const imgArr = petInfo.imgUrl == null ? null : [petInfo.imgUrl];
-          const url = await handleS3ImgUrl(
-            imgArr,
-            accessToken,
-            "PROFILE_IMAGE",
-          );
+      <div>
+        <Button
+          disabled={!(isFilled && isWarning)}
+          onClick={async (e) => {
+            e.preventDefault();
+            const imgArr = petInfo.imgUrl == null ? null : [petInfo.imgUrl];
+            const url = await handleS3ImgUrl(
+              imgArr,
+              accessToken,
+              "PROFILE_IMAGE",
+            );
 
-          postGroupInfo(petInfo, form, url[0], accessToken);
-        }}
-      >
-        확인
-      </Button>
+            postGroupInfo(petInfo, form, url[0], accessToken);
+          }}
+        >
+          확인
+        </Button>
+      </div>
     </s.Form>
   );
 }
