@@ -17,7 +17,7 @@ export function Setting() {
   const { isOpen, setIsOpen } = useModal();
   const [toggle, setToggle] = useState(false);
   const nav = useNavigate();
-  const { accessToken, nativeRoute, isNative } = useNative();
+  const { accessToken } = useNative();
 
   const [groupId, setGroupId] = useState(0);
   const [modalKey, setModalKey] = useState<ModalKeyType>("deleteAccount");
@@ -86,7 +86,6 @@ export function Setting() {
           로그 아웃
         </s.Li>
       </s.Ul>
-      <p>{`네이티브 라우터: ${nativeRoute} |  있는지: ${isNative}`}</p>
       <s.WithdrawBox
         onClick={() => {
           setModalKey("deleteAccount");

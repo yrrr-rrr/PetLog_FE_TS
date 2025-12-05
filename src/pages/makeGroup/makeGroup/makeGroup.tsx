@@ -3,12 +3,10 @@ import { CareInfoForm } from "../careInfo/careInfoForm";
 import { PetInfoForm } from "../petInfo/petInfoForm";
 import * as s from "./style";
 import { BackButton } from "@/shared/backBtn/BackButton";
-import { useNative } from "@/features/nativeBootstrap/store/wkwebviewStore";
 
 export function MakeGroup() {
   const { step, setStep } = useForm();
   const pageInfoText = ["반려동물 기본 정보", "케어 정보"];
-  const { nativeRoute } = useNative();
 
   return (
     <s.Main>
@@ -28,7 +26,6 @@ export function MakeGroup() {
           </s.Notice>
         </s.TextSection>
       </s.PageTitleSection>
-      <p>{nativeRoute}</p>
       {step === 1 ? <PetInfoForm /> : <CareInfoForm />}
     </s.Main>
   );
