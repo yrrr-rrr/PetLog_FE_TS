@@ -19,7 +19,6 @@ export function BackButton({
   return (
     <s.BackBtn
       onClick={(e) => {
-        alert(`${currentPath}, ${nativeRoute}`);
         if (currentPath !== nativeRoute) {
           nav(-1);
         } else {
