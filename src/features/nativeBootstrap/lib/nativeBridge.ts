@@ -33,7 +33,7 @@ export function setUpNativeInit(): SwiftToReactProtocolType {
 
   console.log("네이티브 초기화 O");
   return {
-    nativeRoute: init.native_route,
+    nativeRoute: init.nativeRoute,
     accessToken: init.accessToken,
     isNative: true,
   };
