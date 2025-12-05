@@ -86,7 +86,6 @@ export function Setting() {
           로그 아웃
         </s.Li>
       </s.Ul>
-      <p>{`네이티브 라우터: ${nativeRoute} |  있는지: ${isNative}`}</p>
       <s.WithdrawBox
         onClick={() => {
           setModalKey("deleteAccount");
