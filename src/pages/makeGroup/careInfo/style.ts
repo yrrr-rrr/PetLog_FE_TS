@@ -104,7 +104,7 @@ export const WarningMassage = styled.p`
 `;
 
 export const BtnBox = styled.div`
-  position: absolute;
+  position: fixed;
   right: 50px;
   bottom: 50px;
 `;

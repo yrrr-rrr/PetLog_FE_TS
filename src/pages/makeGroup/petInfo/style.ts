@@ -124,7 +124,7 @@ export const GenderBtn = styled.div<{
 `;
 
 export const BtnBox = styled.div`
-  position: absolute;
+  position: fixed;
   right: 50px;
   bottom: 50px;
 `;
