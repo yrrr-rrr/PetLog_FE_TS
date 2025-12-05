@@ -12,7 +12,7 @@ export const useNative = create<NativeTyp>((set) => ({
   isNative: false,
   setNative: (obj) =>
     set(() => ({
-      native_route: obj.nativeRoute,
+      nativeRoute: obj.nativeRoute,
       accessToken: obj.accessToken,
       isNative: obj.isNative,
     })),
