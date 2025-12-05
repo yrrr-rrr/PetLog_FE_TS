@@ -22,16 +22,16 @@ export type ReactToSwiftMessage = {
 export function setUpNativeInit(): SwiftToReactProtocolType {
   const init = (window as any).__NATIVE_INIT__;
 
-  if (!init) {
-    console.log("네이티브 초기화 x");
-    return {
-      nativeRoute: "/설정 안됨",
-      accessToken: "",
-      isNative: false,
-    };
-  }
+  // if (!init) {
+  //   console.log("네이티브 초기화 x");
+  //   return {
+  //     nativeRoute: "/설정 안됨",
+  //     accessToken: "",
+  //     isNative: false,
+  //   };
+  // }
 
-  console.log("네이티브 초기화 O");
+  // console.log("네이티브 초기화 O");
   return {
     nativeRoute: init.native_route,
     accessToken: init.accessToken,
