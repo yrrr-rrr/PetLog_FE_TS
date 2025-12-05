@@ -14,7 +14,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   body{
     margin: 0;
-    width: 440px;
+    width: 100vw;
     height: 100%;
     min-height: 100vh;
     font-family: ${({ theme }) => theme.font.family}; 

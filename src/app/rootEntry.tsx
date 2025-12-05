@@ -11,7 +11,6 @@ export function RootEntry() {
       nav(nativeRoute, { replace: true });
     } else {
       nav("/start", { replace: true });
-      alert("연결 x");
     }
   });
 

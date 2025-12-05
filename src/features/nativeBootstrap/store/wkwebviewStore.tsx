@@ -7,8 +7,8 @@ export type NativeTyp = SwiftToReactProtocolType & {
 };
 
 export const useNative = create<NativeTyp>((set) => ({
-  nativeRoute: "/diary",
-  accessToken: "a",
+  nativeRoute: "/start",
+  accessToken: "",
   isNative: false,
   setNative: (obj) =>
     set(() => ({
