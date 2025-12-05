@@ -17,7 +17,7 @@ export function Setting() {
   const { isOpen, setIsOpen } = useModal();
   const [toggle, setToggle] = useState(false);
   const nav = useNavigate();
-  const { accessToken } = useNative();
+  const { accessToken, nativeRoute, isNative } = useNative();
 
   const [groupId, setGroupId] = useState(0);
   const [modalKey, setModalKey] = useState<ModalKeyType>("deleteAccount");
@@ -53,7 +53,6 @@ export function Setting() {
   return (
     <s.Main>
       <BackButton>설정</BackButton>
-
       <s.Ul>
         <s.Li>
           <p>알림 수신 여부</p>
@@ -87,6 +86,7 @@ export function Setting() {
           로그 아웃
         </s.Li>
       </s.Ul>
+      <p>{`네이티브 라우터: ${nativeRoute} |  있는지: ${isNative}`}</p>
       <s.WithdrawBox
         onClick={() => {
           setModalKey("deleteAccount");
