@@ -9,11 +9,12 @@ export const Background = styled.div`
   align-items: center;
   position: absolute;
   top: 0;
+  z-index: 1;
 `;
 
 export const Modal = styled.div`
   padding: 5vw;
-  gap: 8vw;
+  gap: 12vw;
   width: 320px;
   height: 210px;
   border: 1px solid ${({ theme }) => theme.color.black};

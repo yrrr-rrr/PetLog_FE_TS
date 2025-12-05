@@ -11,6 +11,7 @@ export const BackBtn = styled.div`
   top: 0;
   background-color: ${({ theme }) => theme.color.white};
   cursor: pointer;
+  z-index: 1;
 `;
 
 export const Title = styled.p`
