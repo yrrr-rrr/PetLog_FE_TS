@@ -1,6 +1,8 @@
+import { useLocation } from "react-router-dom";
 import { Button } from "../../button/button";
 import { useModal } from "../store/modalStroe";
 import * as s from "./style";
+import { useNative } from "@/features/nativeBootstrap/store/wkwebviewStore";
 
 export function BaseModal({
   message,
@@ -9,11 +11,14 @@ export function BaseModal({
   message: string;
   onClick: () => void;
 }) {
+  const { nativeRoute } = useNative();
+  const currentPath = useLocation().pathname;
   const { setClose } = useModal();
   return (
     <s.Background>
       <s.Modal>
-        <s.Message>{message}</s.Message>
+        {`${currentPath}, ${nativeRoute}`}
+        {/* <s.Message>{message}</s.Message> */}
         <s.BtnDiv>
           <Button
             color="gray"
