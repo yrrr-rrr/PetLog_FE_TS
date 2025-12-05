@@ -18,7 +18,7 @@ export function BaseModal({
     <s.Background>
       <s.Modal>
         {`${currentPath}, ${nativeRoute}`}
-        {/* <s.Message>{message}</s.Message> */}
+        <s.Message>{message}</s.Message>
         <s.BtnDiv>
           <Button
             color="gray"
