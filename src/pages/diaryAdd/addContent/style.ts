@@ -2,7 +2,7 @@ import { GetIcon } from "@/shared/getIcon/getIcon";
 import styled from "styled-components";
 
 export const Main = styled.main`
-  padding: 0 20px 20px 20px;
+  padding: 0 20px 0 20px;
   gap: 40px;
   width: 100%;
   height: 100vh;
