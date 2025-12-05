@@ -2,12 +2,14 @@ import { GetIcon } from "@/shared/getIcon/getIcon";
 import styled from "styled-components";
 
 export const Main = styled.main`
+  padding: 0 20px 20px 20px;
   gap: 40px;
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: end;
+  justify-content: space-between;
   position: relative;
 `;
 
@@ -86,10 +88,4 @@ export const Content = styled.textarea`
     font-size: ${({ theme }) => theme.font.body_M};
     font-weight: ${({ theme }) => theme.font.weightSemiBold};
   }
-`;
-
-export const BtnBox = styled.div`
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
 `;

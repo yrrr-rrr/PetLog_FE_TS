@@ -1,6 +1,6 @@
 import { useNative } from "../store/wkwebviewStore";
 
-export type Routes = "/diary" | "/setting" | "/start";
+export type Routes = "/diary" | "/setting" | "/start" | "/설정 안됨";
 
 export type SwiftToReactProtocolType = {
   nativeRoute: Routes;
@@ -25,7 +25,7 @@ export function setUpNativeInit(): SwiftToReactProtocolType {
   if (!init) {
     console.log("네이티브 초기화 x");
     return {
-      nativeRoute: "/start",
+      nativeRoute: "/설정 안됨",
       accessToken: "",
       isNative: false,
     };

@@ -1,14 +1,22 @@
 import styled from "styled-components";
 
 export const Form = styled.form`
-  padding-top: 50px;
-  gap: 40px;
+  padding: 50px;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: end;
+  justify-content: space-between;
   position: relative;
+`;
+
+export const InputSection = styled.section`
+  gap: 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const Section = styled.section`
@@ -101,10 +109,4 @@ export const WarningMassage = styled.p`
   color: ${({ theme }) => theme.color.red};
   font-size: ${({ theme }) => theme.font.body_XS};
   font-weight: ${({ theme }) => theme.font.weightRegular};
-`;
-
-export const BtnBox = styled.div`
-  position: fixed;
-  right: 50px;
-  bottom: 50px;
 `;

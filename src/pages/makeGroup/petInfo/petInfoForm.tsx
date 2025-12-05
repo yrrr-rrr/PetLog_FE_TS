@@ -44,25 +44,25 @@ export function PetInfoForm() {
 
   return (
     <s.Form action="">
-      <Profile setForm={setForm} />
-      <InputSection
-        inputWarning={inputWarning}
-        setForm={setForm}
-        setInputWarning={setInputWarning}
-      />
-      <Gender setForm={setForm} />
-      <s.BtnBox>
-        <Button
-          disabled={!(isWarning && isFilled)}
-          onClick={(e) => {
-            e.preventDefault();
-            setInfo(form);
-            setStep("next");
-          }}
-        >
-          다음
-        </Button>
-      </s.BtnBox>
+      <s.InputSection>
+        <Profile setForm={setForm} />
+        <InputSection
+          inputWarning={inputWarning}
+          setForm={setForm}
+          setInputWarning={setInputWarning}
+        />
+        <Gender setForm={setForm} />
+      </s.InputSection>
+      <Button
+        disabled={!(isWarning && isFilled)}
+        onClick={(e) => {
+          e.preventDefault();
+          setInfo(form);
+          setStep("next");
+        }}
+      >
+        다음
+      </Button>
     </s.Form>
   );
 }

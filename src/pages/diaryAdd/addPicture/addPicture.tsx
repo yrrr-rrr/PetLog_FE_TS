@@ -20,20 +20,16 @@ export function AddPicture() {
             existingUrls={param == "adddiary" ? [] : diaryDetail.images}
           />
         </s.ImgDiv>
-        <s.BtnBox>
-          <Button
-            onClick={() => {
-              nav(
-                param == "editdiary"
-                  ? "/editdiary/content"
-                  : "/adddiary/content",
-              );
-            }}
-          >
-            다음
-          </Button>
-        </s.BtnBox>
       </s.AddSection>
+      <Button
+        onClick={() => {
+          nav(
+            param == "editdiary" ? "/editdiary/content" : "/adddiary/content",
+          );
+        }}
+      >
+        다음
+      </Button>
     </s.Main>
   );
 }

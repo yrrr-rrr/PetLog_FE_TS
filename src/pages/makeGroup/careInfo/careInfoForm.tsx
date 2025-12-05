@@ -46,68 +46,68 @@ export function CareInfoForm() {
 
   return (
     <s.Form>
-      <s.Section>
-        <CycleInput
-          label="급여 주기"
-          type="feedingCycle"
-          setForm={setForm}
-          setDisabled={setDisabled}
-          disabled={disabled}
-        />
-        <LastCareTime
-          label="마지막 급여 시간"
-          type="lastFeedingTime"
-          setForm={setForm}
-          setDisabled={setDisabled}
-          disabled={disabled}
-        />
-      </s.Section>
-      <s.Section>
-        <CycleInput
-          label="물 교체 주기"
-          type="wateringCycle"
-          setForm={setForm}
-          setDisabled={setDisabled}
-          disabled={disabled}
-        />
-        <LastCareTime
-          label="마지막 교체 시간"
-          type="lastWateringTime"
-          setForm={setForm}
-          setDisabled={setDisabled}
-          disabled={disabled}
-        />
-      </s.Section>
-      <s.Note
-        placeholder="보육 시 참고해야 할 사항이 있다면 적어주세요"
-        onChange={(e) => {
-          const value = e.target.value;
-          setForm((prev) => {
-            if (value) {
-              return { ...prev, note: value };
-            }
-            return { ...prev, note: null };
-          });
-        }}
-      ></s.Note>
-      <s.BtnBox>
-        <Button
-          disabled={!(isFilled && isWarning)}
-          onClick={async (e) => {
-            e.preventDefault();
-            const imgArr = petInfo.imgUrl == null ? null : [petInfo.imgUrl];
-            const url = await handleS3ImgUrl(
-              imgArr,
-              accessToken,
-              "PROFILE_IMAGE",
-            );
-
-            postGroupInfo(petInfo, form, url[0], accessToken);
+      <s.InputSection>
+        <s.Section>
+          <CycleInput
+            label="급여 주기"
+            type="feedingCycle"
+            setForm={setForm}
+            setDisabled={setDisabled}
+            disabled={disabled}
+          />
+          <LastCareTime
+            label="마지막 급여 시간"
+            type="lastFeedingTime"
+            setForm={setForm}
+            setDisabled={setDisabled}
+            disabled={disabled}
+          />
+        </s.Section>
+        <s.Section>
+          <CycleInput
+            label="물 교체 주기"
+            type="wateringCycle"
+            setForm={setForm}
+            setDisabled={setDisabled}
+            disabled={disabled}
+          />
+          <LastCareTime
+            label="마지막 교체 시간"
+            type="lastWateringTime"
+            setForm={setForm}
+            setDisabled={setDisabled}
+            disabled={disabled}
+          />
+        </s.Section>
+        <s.Note
+          placeholder="보육 시 참고해야 할 사항이 있다면 적어주세요"
+          onChange={(e) => {
+            const value = e.target.value;
+            setForm((prev) => {
+              if (value) {
+                return { ...prev, note: value };
+              }
+              return { ...prev, note: null };
+            });
           }}
-        >
-          확인
-        </Button>
-      </s.BtnBox>
+        ></s.Note>
+      </s.InputSection>
+      <Button
+        disabled={!(isFilled && isWarning)}
+        onClick={async (e) => {
+          e.preventDefault();
+          const imgArr = petInfo.imgUrl == null ? null : [petInfo.imgUrl];
+          const url = await handleS3ImgUrl(
+            imgArr,
+            accessToken,
+            "PROFILE_IMAGE",
+          );
+
+          postGroupInfo(petInfo, form, url[0], accessToken);
+        }}
+      >
+        확인
+      </Button>
     </s.Form>
   );
 }

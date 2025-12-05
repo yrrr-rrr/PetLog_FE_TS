@@ -103,8 +103,8 @@ export const DefaultImg = styled.div`
 `;
 
 export const PlusBtn = styled.div`
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   border-radius: 100%;
   display: flex;
   justify-content: center;

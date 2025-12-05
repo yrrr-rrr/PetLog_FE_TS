@@ -95,42 +95,40 @@ export function AddContent() {
             setContent(value);
           }}
         ></s.Content>
-        <s.BtnBox>
-          <Button
-            onClick={async () => {
-              if (!accessToken) {
-                return;
-              }
-              const newImgArr = getNewImgs(imgs);
-              const existImgArr = getExistImgs(imgs);
-              const url = await handleS3ImgUrl(
-                newImgArr,
-                accessToken,
-                "DIARY_IMAGE",
-              );
-              const finalImgArr = existImgArr.concat(url);
-              addDiary(
-                param == "editdiary" ? "edit" : "add",
-                handleInput(title, placeholder.title, currentPage),
-                handleInput(content, placeholder.content, currentPage),
-                finalImgArr ? finalImgArr : null,
-                formatYYYYMMDD(date),
-                accessToken,
-                groupId,
-                diaryId,
-                nav,
-              );
-            }}
-            disabled={
-              (title || placeholder.title) && (content || placeholder.content)
-                ? false
-                : true
-            }
-          >
-            저장
-          </Button>
-        </s.BtnBox>
       </s.ContentSection>
+      <Button
+        onClick={async () => {
+          if (!accessToken) {
+            return;
+          }
+          const newImgArr = getNewImgs(imgs);
+          const existImgArr = getExistImgs(imgs);
+          const url = await handleS3ImgUrl(
+            newImgArr,
+            accessToken,
+            "DIARY_IMAGE",
+          );
+          const finalImgArr = existImgArr.concat(url);
+          addDiary(
+            param == "editdiary" ? "edit" : "add",
+            handleInput(title, placeholder.title, currentPage),
+            handleInput(content, placeholder.content, currentPage),
+            finalImgArr ? finalImgArr : null,
+            formatYYYYMMDD(date),
+            accessToken,
+            groupId,
+            diaryId,
+            nav,
+          );
+        }}
+        disabled={
+          (title || placeholder.title) && (content || placeholder.content)
+            ? false
+            : true
+        }
+      >
+        저장
+      </Button>
     </s.Main>
   );
 }

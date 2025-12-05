@@ -1,13 +1,22 @@
 import styled from "styled-components";
 
 export const Form = styled.form`
-  gap: 32px;
+  padding: 0 50px 50px 50px;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: end;
+  justify-content: space-between;
   position: relative;
+`;
+
+export const InputSection = styled.section`
+  gap: 32px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const ProfileBox = styled.section`
@@ -121,10 +130,4 @@ export const GenderBtn = styled.div<{
       : theme.color.gray_3};
 
   cursor: pointer;
-`;
-
-export const BtnBox = styled.div`
-  position: fixed;
-  right: 50px;
-  bottom: 50px;
 `;
