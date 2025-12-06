@@ -25,7 +25,6 @@ export const ContentSection = styled.section`
 
 export const TitleBox = styled.div`
   gap: 1vh;
-  padding: 0 3vw;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -40,6 +39,8 @@ export const TitleDiv = styled.div`
 `;
 
 export const Title = styled.input`
+  width: 80%;
+  min-width: 220px;
   border: none;
   outline: none;
 
@@ -72,7 +73,7 @@ export const Date = styled.p`
 
 export const Content = styled.textarea`
   padding: 12px;
-  width: 90vw;
+  width: 100%;
   height: 28vh;
   border: none;
   outline: none;
