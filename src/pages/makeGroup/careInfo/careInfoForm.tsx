@@ -103,7 +103,6 @@ export function CareInfoForm() {
               accessToken,
               "PROFILE_IMAGE",
             );
-
             postGroupInfo(petInfo, form, url[0], accessToken);
           }}
         >
