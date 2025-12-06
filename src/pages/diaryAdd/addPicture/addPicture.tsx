@@ -21,15 +21,17 @@ export function AddPicture() {
           />
         </s.ImgDiv>
       </s.AddSection>
-      <Button
-        onClick={() => {
-          nav(
-            param == "editdiary" ? "/editdiary/content" : "/adddiary/content",
-          );
-        }}
-      >
-        다음
-      </Button>
+      <div>
+        <Button
+          onClick={() => {
+            nav(
+              param == "editdiary" ? "/editdiary/content" : "/adddiary/content",
+            );
+          }}
+        >
+          다음
+        </Button>
+      </div>
     </s.Main>
   );
 }
