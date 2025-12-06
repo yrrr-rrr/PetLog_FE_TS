@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Form = styled.form`
-  padding: 5vh 5vh 0 5vh;
+  padding: 3vh 3vh 0 3vh;
   width: 100%;
   height: 100%;
   display: flex;
@@ -21,7 +21,7 @@ export const InputSection = styled.section`
 
 export const Section = styled.section`
   gap: 5vw;
-  width: 85vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
 `;
@@ -63,7 +63,6 @@ export const TimeBox = styled.div`
   gap: 3vw;
   display: flex;
   align-items: center;
-
   span {
     color: ${({ theme }) => theme.color.black};
     font-size: ${({ theme }) => theme.font.body_S};
@@ -95,7 +94,7 @@ export const Input = styled.input`
 
 export const Note = styled.textarea`
   padding: 4vw;
-  width: 75vw;
+  width: 100%;
   height: 22vh;
   border: none;
   border-radius: 10px;
